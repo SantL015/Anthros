@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="es-CO">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Guía editable de respuestas para el asistente de Anthros.">
+    <title>Guía del asistente | Anthros</title>
+    <link rel="stylesheet" href="./assets/css/styles.css">
+</head>
+<body class="assistant-guide-page">
+    <main class="assistant-guide-shell">
+        <a class="admin-brand" href="./index.html">ANTHROS</a>
+        <p class="section-eyebrow">Herramientas de marca</p>
+        <h1>Guía de MágicoBot</h1>
+        <p class="assistant-guide-intro">Edita las preguntas, respuestas y palabras clave que orientan al asistente con información de Anthros y sus colecciones.</p>
+
+        <aside class="assistant-guide-notice">
+            <strong>Alcance de esta versión</strong>
+            <p>La guía se guarda en el navegador actual y el asistente la consulta en este mismo sitio. Exporta el JSON para respaldarlo o publicarlo. Esto no conecta un modelo de IA ni sincroniza los cambios con otros dispositivos.</p>
+        </aside>
+
+        <section class="assistant-guide-editor" aria-labelledby="knowledgeTitle">
+            <div class="assistant-guide-heading">
+                <div>
+                    <span class="section-eyebrow">Base de respuestas</span>
+                    <h2 id="knowledgeTitle">Información de Anthros</h2>
+                </div>
+                <a href="./admin-productos.html">Administrar productos</a>
+            </div>
+            <label for="knowledgeEditor">Edita una lista JSON. Cada entrada contiene <code>question</code>, <code>answer</code> y <code>keywords</code>.</label>
+            <textarea id="knowledgeEditor" spellcheck="false" aria-describedby="knowledgeHelp"></textarea>
+            <p id="knowledgeHelp">Límites: 100 respuestas, 160 caracteres por pregunta, 1.500 por respuesta y 30 palabras clave. No agregues datos personales ni información sensible.</p>
+            <p id="knowledgeStatus" class="admin-status" role="status" aria-live="polite"></p>
+            <div class="assistant-guide-actions">
+                <button type="button" class="qv-btn-primary" id="saveKnowledge">Guardar para este navegador</button>
+                <button type="button" class="qv-btn-secondary" id="importKnowledge">Importar JSON</button>
+                <button type="button" class="qv-btn-secondary" id="exportKnowledge">Exportar JSON</button>
+                <button type="button" class="qv-btn-secondary" id="resetKnowledge">Restaurar base</button>
+                <input id="knowledgeImport" type="file" accept="application/json,.json" hidden>
+            </div>
+        </section>
+        <a class="assistant-guide-back" href="./index.html">← Volver a Anthros</a>
+    </main>
+    <script src="./assets/js/assistant-knowledge.js"></script>
+    <script src="./assets/js/admin-guia-chatbot.js"></script>
+</body>
+</html>

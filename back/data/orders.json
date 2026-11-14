@@ -1,0 +1,72 @@
+[
+  {
+    "id": "ORD-MWFQIPM1",
+    "createdAt": "2026-11-14T01:36:20.525Z",
+    "customer": {
+      "name": "fnfnfh",
+      "email": "dbbfebd@hotmail.com",
+      "phone": "866585858",
+      "city": "Cartagena",
+      "address": "676 86-86"
+    },
+    "payment": "card",
+    "items": [
+      {
+        "id": 2,
+        "name": "Camisa Lino Serenity",
+        "category": "hombres nuevos",
+        "gender": "Hombre",
+        "line": "Camisas",
+        "price": 125000,
+        "originalPrice": null,
+        "discount": 0,
+        "isNew": true,
+        "badge": "Nuevo",
+        "sizes": [
+          "S",
+          "M",
+          "L",
+          "XL"
+        ],
+        "collection": "Brisas de Identidad",
+        "year": 2026,
+        "material": "Lino europeo certificado",
+        "colors": [
+          "Arena",
+          "Blanco humo"
+        ],
+        "shipping": "3-5 días hábiles",
+        "care": "Lavar a mano y planchar a baja temperatura",
+        "img": "/assets/images/Brisas de Identidad  Fresco, holgado y sostenible (13).jfif",
+        "hoverImg": "/assets/images/Brisas de Identidad  Fresco, holgado y sostenible (11).jfif",
+        "desc": "Camisa de lino ligero y transpirable, con una silueta relajada que acompaña tanto los días cálidos como los planes especiales. Disponible en arena y blanco humo.",
+        "rating": 4,
+        "reviews": 87,
+        "cut": "Relaxed Fit",
+        "sustainability": {
+          "material": "Lino europeo 100%",
+          "impact": "Fibra natural biodegradable, bajo consumo hídrico",
+          "cert": "European Flax® · OEKO-TEX"
+        },
+        "size": "L",
+        "qty": 6
+      }
+    ],
+    "appliedPromo": 0,
+    "breakdown": {
+      "subtotal": 750000,
+      "totalQty": 6,
+      "shipping": 0,
+      "promoDiscount": 0,
+      "appliedPromoPct": null,
+      "umbralDisc": 75000,
+      "total": 675000,
+      "ahorro": 75000,
+      "iva": 107773.10924369749,
+      "baseGrav": 567226.8907563025,
+      "afterPromo": 750000,
+      "beforeUmbral": 750000
+    },
+    "total": 675000
+  }
+]

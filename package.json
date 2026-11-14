@@ -1,12 +1,21 @@
 {
-  "name": "activity",
+  "name": "anthros-store",
   "version": "1.0.0",
-  "description": "Readme",
-  "main": "index.js",
+  "description": "Tienda e-commerce ANTHROS para Jóvenes CreaTIvos",
+  "main": "back/server.js",
   "scripts": {
-    "start": "node server.js",
-    "dev": "node --watch server.js",
-    "test": "node --check server.js"
+    "start": "node back/server.js",
+    "dev": "node --watch back/server.js",
+    "seed": "node back/seed.js",
+    "test": "node --check back/server.js && node --check back/routes/accounts.js && node --check back/routes/chat.js && node --check back/routes/orders.js && node --check back/orders/pricing.js && node --check back/routes/products.js && node --check back/models/Producto.js && node --check back/models/Pedido.js && node --check back/config/database.js && node --check back/config/database.test.js && node --check back/data/record-store.js && node --check back/data/record-store.test.js && node --check back/products/repository.js && node --check back/products/resilient-repository.js && node --check back/products/resilient-repository.test.js && node --check back/products/validate-product.js && node --check back/products/api.test.js && node --check front/assets/js/app.js && node --check front/assets/js/calculos.js && node --check front/assets/js/services/index.js && node --check front/assets/js/services.test.js && node --check front/assets/js/admin-productos.js && node --check front/assets/js/assistant-knowledge.js && node --check front/assets/js/admin-guia-chatbot.js && node --check front/assets/js/assistant-knowledge.test.js && node --test back/config/database.test.js back/data/record-store.test.js back/products/resilient-repository.test.js back/products/api.test.js front/assets/js/assistant-knowledge.test.js front/assets/js/services.test.js back/models/models.test.js"
+  },
+  "dependencies": {
+    "cors": "^2.8.6",
+    "dotenv": "^16.6.1",
+    "express": "^4.22.3",
+    "groq-sdk": "^1.6.0",
+    "mongodb": "^6.17.0",
+    "mongoose": "^8.24.9"
   },
   "repository": {
     "type": "git",

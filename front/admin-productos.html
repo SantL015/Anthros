@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="es-CO">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#121212">
+    <meta name="robots" content="noindex, nofollow">
+    <title>Atelier / Catálogo | Anthros</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./assets/css/styles.css?v=anthros-catalog-2">
+    <style>
+        body { min-height: 100vh; background: #f7f5f0; color: #121212; }
+        .admin-shell { width: min(1320px, calc(100% - 40px)); margin: 0 auto; padding: 48px 0 72px; }
+        .admin-topline { display:flex; align-items:center; justify-content:space-between; gap:20px; margin-bottom:36px; }
+        .admin-brand { color:#c8102e; font-weight:800; letter-spacing:.17em; text-decoration:none; }
+        .admin-eyebrow { margin:0 0 8px; color:#c8102e; font-size:.72rem; font-weight:700; letter-spacing:.16em; text-transform:uppercase; }
+        .admin-heading h1 { margin:0; font-family:'Cormorant Garamond',serif; font-size:clamp(2.6rem,6vw,5rem); font-weight:600; line-height:.92; }
+        .admin-heading p { max-width:660px; color:#625f5a; line-height:1.7; }
+        .admin-layout { display:grid; grid-template-columns:minmax(0,1.25fr) minmax(320px,.75fr); gap:24px; margin-top:34px; }
+        .admin-panel { min-width:0; padding:clamp(20px,3vw,34px); border:1px solid #e1ddd5; border-radius:28px; background:#fffefa; box-shadow:0 18px 55px #24180e0c; }
+        .admin-panel h2 { margin:0 0 20px; font-family:'Cormorant Garamond',serif; font-size:2rem; }
+        .admin-toolbar { display:flex; flex-wrap:wrap; gap:10px; margin-bottom:14px; }
+        .admin-toolbar input,.admin-token,.admin-json { min-width:0; border:1px solid #d9d4cb; border-radius:14px; background:white; padding:12px 14px; color:#121212; font:inherit; }
+        .admin-toolbar input { flex:1 1 180px; }
+        .admin-token { width:100%; margin-bottom:18px; }
+        .admin-button { border:0; border-radius:999px; padding:12px 20px; background:#c8102e; color:white; font:600 .9rem Inter,sans-serif; cursor:pointer; transition:transform .2s,background .2s; }
+        .admin-button:hover { transform:translateY(-1px); background:#a90d27; }
+        .admin-button.secondary { background:#252321; }
+        .admin-button.subtle { background:#eeeae2; color:#24211e; }
+        .admin-button.danger { background:#8c1026; }
+        .admin-actions { display:flex; flex-wrap:wrap; gap:10px; margin-top:14px; }
+        .admin-notice { min-height:1.5em; margin:12px 0 0; color:#6b292e; font-size:.9rem; line-height:1.5; }
+        .admin-notice[data-kind="success"] { color:#246345; }
+        .admin-notice[data-kind="error"] { color:#a4112a; }
+        .admin-token-label { display:block; margin-bottom:7px; color:#605b54; font-size:.8rem; font-weight:600; }
+        .admin-product-list { display:grid; gap:9px; max-height:660px; overflow:auto; padding-right:4px; }
+        .admin-product-row { display:flex; align-items:center; gap:14px; padding:10px; border:1px solid #eeeae2; border-radius:17px; }
+        .admin-product-row img { width:58px; height:70px; flex:none; border-radius:12px; object-fit:cover; background:#eeeae2; }
+        .admin-product-info { flex:1; min-width:0; }
+        .admin-product-info strong,.admin-product-info small { display:block; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+        .admin-product-info small { margin-top:4px; color:#77716a; }
+        .admin-row-action { border:0; border-radius:50%; width:38px; height:38px; flex:none; background:#f2eee7; color:#24211e; cursor:pointer; }
+        .admin-row-action:hover { background:#e5ddd2; }
+        .admin-json { display:block; width:100%; min-height:380px; resize:vertical; font: .82rem/1.6 ui-monospace,Consolas,monospace; }
+        .admin-footnote { margin:15px 0 0; color:#77716a; font-size:.82rem; line-height:1.55; }
+        @media(max-width:800px) { .admin-layout { grid-template-columns:1fr; } .admin-shell { width:min(100% - 28px,660px); padding-top:26px; } .admin-topline { margin-bottom:26px; } }
+        @media(prefers-reduced-motion:reduce) { *,*::before,*::after { scroll-behavior:auto!important; transition:none!important; } }
+    </style>
+</head>
+<body>
+    <main class="admin-shell">
+        <div class="admin-topline">
+            <a class="admin-brand" href="./index.html">ANTHROS</a>
+            <div class="admin-actions">
+                <a class="admin-button subtle" href="./admin-guia-chatbot.html">Guía del asistente</a>
+                <a class="admin-button subtle" href="./catalogo.html">Volver a la tienda</a>
+            </div>
+        </div>
+        <header class="admin-heading">
+            <p class="admin-eyebrow">Atelier / Inventario</p>
+            <h1>El catálogo,<br>pieza por pieza.</h1>
+            <p>Administra la colección Anthros. Las operaciones de escritura requieren el token configurado en el servidor; el token solo se conserva en esta pestaña mientras permanezca abierta.</p>
+        </header>
+        <div class="admin-layout">
+            <section class="admin-panel" aria-labelledby="productsTitle">
+                <h2 id="productsTitle">Piezas disponibles</h2>
+                <div class="admin-toolbar">
+                    <input id="productSearch" type="search" placeholder="Buscar por nombre, línea o material" aria-label="Buscar productos">
+                    <button id="searchButton" class="admin-button secondary" type="button">Buscar</button>
+                    <button id="refreshButton" class="admin-button subtle" type="button">Actualizar</button>
+                </div>
+                <p id="listStatus" class="admin-notice" role="status"></p>
+                <div id="productList" class="admin-product-list" aria-live="polite"></div>
+            </section>
+            <section class="admin-panel" aria-labelledby="editorTitle">
+                <h2 id="editorTitle">Ficha de producto</h2>
+                <label class="admin-token-label" for="adminToken">Token de administración</label>
+                <input class="admin-token" id="adminToken" type="password" autocomplete="off" placeholder="Pega el token ADMIN_API_TOKEN" spellcheck="false">
+                <label class="admin-token-label" for="productJson">Ficha JSON (para editar, elige una pieza de la lista)</label>
+                <textarea class="admin-json" id="productJson" spellcheck="false" aria-describedby="editorHelp"></textarea>
+                <p id="editorHelp" class="admin-footnote">La creación asigna el ID automáticamente. Las imágenes deben usar rutas internas como <code>/assets/images/nombre.jpg</code>. El identificador no se puede cambiar.</p>
+                <div class="admin-actions">
+                    <button id="saveButton" class="admin-button" type="button">Crear producto</button>
+                    <button id="deleteButton" class="admin-button danger" type="button" disabled>Eliminar seleccionado</button>
+                    <button id="clearButton" class="admin-button subtle" type="button">Limpiar ficha</button>
+                </div>
+                <p id="editorStatus" class="admin-notice" role="status"></p>
+            </section>
+        </div>
+    </main>
+    <script src="./assets/js/services/index.js?v=anthros-catalog-2"></script>
+    <script src="./assets/js/admin-productos.js?v=anthros-catalog-3"></script>
+</body>
+</html>

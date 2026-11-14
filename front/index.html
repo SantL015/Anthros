@@ -1,0 +1,398 @@
+﻿<!DOCTYPE html>
+<html lang="es-CO">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="theme-color" content="#C8102E">
+    <meta name="description" content="Anthros: prendas con identidad, diseño consciente y carácter propio. Descubre Brisas de Identidad y Eclipse Urbano.">
+    <meta name="keywords" content="ropa, moda, colombia, barranquilla, camisetas, camisas, vestidos, sudaderas, anthros">
+    <meta property="og:title" content="ANTHROS — Viste tu autenticidad">
+    <meta property="og:description" content="Descubre prendas con identidad, diseño consciente y carácter propio.">
+    <meta property="og:type" content="website">
+    <title>ANTHROS — Viste tu autenticidad</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800;900&family=Inter:wght@300;400;500;600;700;800&family=Cormorant+Garamond:wght@500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./assets/css/styles.css?v=anthros-catalog-3">
+</head>
+<body class="home-page">
+    <div class="scroll-progress" id="scrollProgress"></div>
+
+    <!-- NAVBAR (el onclick usa navigateTo para compatibilidad con breadcrumbs) -->
+    <nav>
+        <div class="nav-inner">
+            <a href="./index.html" class="nav-logo animate-fade" onclick="event.preventDefault();navigateTo('home');">ANTHROS</a>
+            <ul class="nav-links">
+                <li class="nav-collections">
+                    <a href="#colecciones" class="animate-fade-up delay-1">Colecciones</a>
+                    <div class="nav-mega-menu">
+                        <a class="nav-mega-card" href="#colecciones">
+                            <img src="./assets/images/Brisas de Identidad  Fresco, holgado y sostenible (1).jfif" alt="" loading="lazy">
+                            <span><small>01 / VERANO</small><strong>Brisas de Identidad</strong><em>Lino, algodón y luz natural</em></span>
+                        </a>
+                        <a class="nav-mega-card" href="#eclipse">
+                            <img src="./assets/images/adis-gris-19053-742485_019053-1_703c77d9-da0b-4aec-b78a-a613020cff3a.webp" alt="" loading="lazy">
+                            <span><small>02 / STREETWEAR</small><strong>Eclipse Urbano</strong><em>Una ciudad. Dos maneras de vivirla.</em></span>
+                        </a>
+                    </div>
+                </li>
+                <li><a href="./catalogo.html" class="animate-fade-up delay-2">Colección</a></li>
+                <li><a href="./nosotros.html" class="animate-fade-up delay-2">Nosotros</a></li>
+                <li><a href="./index.html#impacto" class="animate-fade-up delay-3">Impacto</a></li>
+                <li><a href="./pedidos.html" class="animate-fade-up delay-4">Pedidos</a></li>
+            </ul>
+            <div class="nav-actions">
+                <details class="nav-utility">
+                    <summary class="nav-utility-trigger animate-fade" aria-label="Abrir herramientas de Anthros" title="Herramientas">Atelier <span aria-hidden="true">+</span><span class="nav-cart-badge" id="navCartCount">0</span></summary>
+                    <div class="nav-utility-menu">
+                        <button class="theme-toggle" id="themeToggle" onclick="toggleTheme()" aria-label="Cambiar tema" title="Cambiar tema"></button>
+                        <a class="utility-link" href="./cuenta.html"><span>Mi cuenta</span></a>
+                        <a class="utility-link" href="./favoritos.html" onclick="event.preventDefault();navigateTo('favorites');"><span>Favoritos</span><span class="favorites-count" id="favoritesCount" style="display:none;">0</span></a>
+                        <button class="utility-link utility-cart" onclick="toggleCart()" aria-label="Abrir carrito"><span>Carrito</span><span class="cart-count" id="cartCount">0</span></button>
+                    </div>
+                </details>
+                <button class="hamburger animate-fade" id="hamburgerBtn" aria-label="Abrir menú" aria-expanded="false" onclick="toggleMobileMenu()">
+                    <span></span><span></span><span></span>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- MOBILE MENU -->
+    <div class="mobile-menu" id="mobileMenu" onclick="closeMenuOutside(event)">
+        <div class="mobile-menu-panel" onclick="event.stopPropagation()">
+            <div class="mobile-menu-title">MENÚ ANTHROS</div>
+            <ul class="mobile-nav-links">
+                <li><a href="#colecciones" onclick="event.preventDefault();closeMobileMenu();document.getElementById('colecciones').scrollIntoView({behavior:'smooth'});"> Colecciones</a></li>
+                <li><a href="#eclipse" onclick="event.preventDefault();closeMobileMenu();document.getElementById('eclipse').scrollIntoView({behavior:'smooth'});"> Eclipse Urbano</a></li>
+                <li><a href="#impacto" onclick="event.preventDefault();closeMobileMenu();document.getElementById('impacto').scrollIntoView({behavior:'smooth'});"> Impacto</a></li>
+                <li><a href="#nosotros-home" onclick="event.preventDefault();closeMobileMenu();document.getElementById('nosotros-home').scrollIntoView({behavior:'smooth'});"> Nosotros</a></li>
+                <li><a href="./index.html" onclick="event.preventDefault();closeMobileMenu();navigateTo('home');"> Inicio</a></li>
+                <li><a href="./catalogo.html" onclick="event.preventDefault();closeMobileMenu();navigateTo('catalogo');"> Colección</a></li>
+                <li><a href="./pedidos.html" onclick="event.preventDefault();closeMobileMenu();navigateTo('orders');"> Mis Pedidos</a></li>
+                <li><a href="./cuenta.html" onclick="closeMobileMenu();"> Mi cuenta</a></li>
+                <li><a href="./index.html#contacto" onclick="event.preventDefault();closeMobileMenu();navigateTo('home','contacto');"> Contacto</a></li>
+                <li><a href="#" onclick="event.preventDefault();closeMobileMenu();showFAQModal();"> Preguntas Frecuentes</a></li>
+                <li><a href="#" onclick="event.preventDefault();closeMobileMenu();showSizeGuideModal();"> Guía de Tallas</a></li>
+            </ul>
+            <div class="mobile-menu-divider"></div>
+            <div class="mobile-utility-links">
+                <button class="mobile-utility-theme" id="mobileThemeToggle" onclick="toggleTheme()">Cambiar tema</button>
+                <a href="./favoritos.html" onclick="event.preventDefault();closeMobileMenu();navigateTo('favorites');">Mis favoritos <span class="favorites-count" id="mobileFavoritesCount" style="display:none;">0</span></a>
+                <button onclick="closeMobileMenu();toggleCart();">Carrito <span class="cart-count" id="mobileCartCount">0</span></button>
+            </div>
+            <a href="./catalogo.html" class="mobile-cta" onclick="event.preventDefault();closeMobileMenu();navigateTo('catalogo');"> Explorar Productos</a>
+        </div>
+    </div>
+
+    <!-- HERO -->
+    <header id="inicio" class="hero-carousel-shell">
+        <div class="hero-slide-media is-active" aria-hidden="true"></div>
+        <div class="hero">
+            <div class="hero-kicker animate-fade-up delay-1"><span class="hero-kicker-dot"></span> Colección que deja huella</div>
+            <h1 class="hero-title animate-fade-up delay-2">ANTHROS</h1>
+            <p class="hero-slogan animate-fade-up delay-3">"Moda que se siente, estilo que perdura."</p>
+            <p class="hero-tagline animate-fade-up delay-4">Prendas con carácter para quienes convierten lo cotidiano en algo propio. Diseño atemporal, materiales honestos y una forma más consciente de vestir.</p>
+            <div class="hero-cta animate-fade-up delay-5">
+                <a href="./catalogo.html" class="btn-primary" onclick="event.preventDefault();navigateTo('catalogo');">Ver Colección</a>
+                <a href="./nosotros.html" class="btn-secondary" onclick="event.preventDefault();navigateTo('nosotros');">Nuestra Historia</a>
+            </div>
+            <div class="hero-badges animate-fade-up delay-6">
+                <div class="hero-badge"><div class="hero-badge-icon">01</div><div class="hero-badge-text"><span>Diseño consciente</span>Hecho para durar</div></div>
+                <div class="hero-badge"><div class="hero-badge-icon">02</div><div class="hero-badge-text"><span>Texturas premium</span>Comodidad real</div></div>
+                <div class="hero-badge"><div class="hero-badge-icon">03</div><div class="hero-badge-text"><span>Envío sencillo</span>Recibe en casa</div></div>
+            </div>
+        </div>
+        <div class="hero-carousel-controls" aria-label="Controles de portada">
+            <button type="button" onclick="changeHeroSlide(-1)" aria-label="Imagen anterior"></button>
+            <div class="hero-carousel-dots" id="heroCarouselDots"></div>
+            <button type="button" onclick="changeHeroSlide(1)" aria-label="Imagen siguiente"></button>
+        </div>
+    </header>
+
+    <section class="editorial-collections reveal" id="colecciones" aria-labelledby="latestCollectionsTitle">
+        <div class="editorial-heading">
+            <span class="section-eyebrow">Diario de colección / 2026</span>
+            <h2 id="latestCollectionsTitle">Últimas colecciones</h2>
+            <p>Una mirada curada a las piezas que están marcando el ritmo de la temporada.</p>
+        </div>
+        <div class="editorial-collage">
+            <a class="editorial-tile editorial-tile-main" href="./catalogo.html" onclick="event.preventDefault();navigateTo('catalogo');">
+                <img src="./assets/images/Brisas de Identidad  Fresco, holgado y sostenible (13).jfif" alt="Camisa de lino de la colección Brisas de Identidad" loading="eager">
+                <span class="editorial-tile-caption"><small>01 / Brisas de Identidad</small><strong>Lino, luz y movimiento</strong></span>
+            </a>
+            <a class="editorial-tile editorial-tile-top" href="./catalogo.html" onclick="event.preventDefault();navigateTo('catalogo');">
+                <img src="./assets/images/Brisas de Identidad  Fresco, holgado y sostenible (10).jfif" alt="Camiseta de algodón de la colección Essentials" loading="lazy">
+                <span class="editorial-tile-caption"><small>02 / Essentials</small><strong>El uniforme diario</strong></span>
+            </a>
+            <a class="editorial-tile editorial-tile-bottom" href="./catalogo.html" onclick="event.preventDefault();navigateTo('catalogo');">
+                <img src="./assets/images/adis-gris-19053-742485_019053-1_703c77d9-da0b-4aec-b78a-a613020cff3a.webp" alt="Sudadera urbana de la colección Eclipse Urbano" loading="lazy">
+                <span class="editorial-tile-caption"><small>03 / Eclipse Urbano</small><strong>Texturas con carácter</strong></span>
+            </a>
+            <div class="editorial-stamp">ANTHROS<br><span>EST. 2026</span></div>
+        </div>
+    </section>
+
+    <section class="about-editorial reveal" id="nosotros-home" aria-labelledby="aboutEditorialTitle">
+        <div class="about-editorial-visual">
+            <img src="./assets/images/camisa-rayas-manga-corta-ecologica-350x464.jpg" alt="Textura y detalle de una prenda de la colección Anthros" loading="lazy">
+            <span class="about-editorial-stamp" aria-hidden="true">A / 26</span>
+            <span class="about-editorial-caption">HECHO PARA SER TUYO · ANTHROS</span>
+        </div>
+        <div class="about-editorial-copy">
+            <span class="section-eyebrow">Sobre Anthros / Nuestra mirada</span>
+            <h2 id="aboutEditorialTitle">Vestirse es una forma de <em>decir quién eres.</em></h2>
+            <p>Creemos en prendas con identidad: piezas que se sienten bien, expresan algo propio y encuentran su lugar en la vida real.</p>
+            <p>Diseñamos desde Colombia con pasión por el detalle, respeto por los materiales y la convicción de que la moda debe abrir oportunidades y espacio para todos.</p>
+            <div class="about-editorial-values" aria-label="Valores de Anthros">
+                <span><strong>01</strong> Identidad</span>
+                <span><strong>02</strong> Pasión</span>
+                <span><strong>03</strong> Sostenibilidad</span>
+                <span><strong>04</strong> Oportunidad</span>
+            </div>
+            <a class="about-editorial-link" href="./nosotros.html" onclick="event.preventDefault();navigateTo('nosotros');">Descubre nuestra historia <span aria-hidden="true">↗</span></a>
+        </div>
+    </section>
+
+    <section class="eclipse-section reveal" id="eclipse" data-mode="day" aria-labelledby="eclipseTitle">
+        <div class="eclipse-copy">
+            <span class="section-eyebrow">Colección 02 / Streetwear dual</span>
+            <h2 id="eclipseTitle">Eclipse <em>Urbano</em></h2>
+            <p class="eclipse-description" id="eclipseDescription">Sombra y Tierra. Siluetas relajadas, texturas honestas y una luz que acompaña el ritmo de la ciudad.</p>
+            <div class="eclipse-switch" role="group" aria-label="Elegir ambiente de Eclipse Urbano">
+                <button type="button" class="is-active" data-eclipse-mode="day" aria-pressed="true" onclick="setEclipseMode('day')">01 / Día</button>
+                <button type="button" data-eclipse-mode="night" aria-pressed="false" onclick="setEclipseMode('night')">02 / Noche</button>
+            </div>
+            <a href="./catalogo.html" class="eclipse-link" onclick="event.preventDefault();navigateTo('catalogo');">Explorar la colección <span aria-hidden="true">↗</span></a>
+        </div>
+        <figure class="eclipse-visual">
+            <img src="./assets/images/Brisas de Identidad  Fresco, holgado y sostenible (10).jfif"
+                 data-day-image="./assets/images/Brisas de Identidad  Fresco, holgado y sostenible (10).jfif"
+                 data-night-image="./assets/images/adis-gris-19053-742485_019053-1_703c77d9-da0b-4aec-b78a-a613020cff3a.webp"
+                 alt="Look editorial de Eclipse Urbano" loading="lazy">
+            <figcaption><span>ANTHROS / ECLIPSE</span><strong data-eclipse-caption>Sombra y Tierra</strong></figcaption>
+            <span class="eclipse-index" aria-hidden="true">02</span>
+        </figure>
+    </section>
+
+    <main id="mainContent">
+        <section class="section reveal" id="productos">
+            <div class="section-header">
+                <span class="section-eyebrow">Nuestra Colección</span>
+                <h2 class="section-title">Piezas para cada versión de ti</h2>
+                <p class="section-subtitle">Descubre la colección Anthros: básicos, lino y prendas urbanas para vestir a tu manera.</p>
+            </div>
+            <!-- La selección completa se llena desde el catálogo disponible. -->
+            <div class="products-grid home-products-grid" id="productsGrid"></div>
+            <div style="margin-top:var(--space-5);text-align:center;">
+                <a href="./catalogo.html" class="btn-primary" style="display:inline-block;" onclick="event.preventDefault();navigateTo('catalogo');"> Ver Colección Completa</a>
+            </div>
+        </section>
+
+        <section class="impact-section reveal" id="impacto" aria-labelledby="impactTitle">
+            <div class="impact-heading">
+                <span class="section-eyebrow">Vestir con intención</span>
+                <h2 id="impactTitle">El futuro también se <em>viste.</em></h2>
+                <p>Creemos en prendas que cuentan quién eres y en una moda que abre espacio para más personas.</p>
+                <a href="./nosotros.html" onclick="event.preventDefault();navigateTo('nosotros');">Conoce nuestra historia <span aria-hidden="true">↗</span></a>
+            </div>
+            <div class="impact-pillars">
+                <article><span>01</span><h3>Materiales con sentido</h3><p>Elegimos tejidos y acabados pensados para acompañarte más allá de una temporada.</p></article>
+                <article><span>02</span><h3>Hecho cerca</h3><p>Una mirada local que valora el oficio, el detalle y el talento de nuestra comunidad.</p></article>
+                <article><span>03</span><h3>Oportunidad para todos</h3><p>La identidad no tiene talla, edad ni una sola forma de expresarse.</p></article>
+            </div>
+        </section>
+
+        <section class="section reveal" id="howtobuy">
+            <div class="section-header">
+                <span class="section-eyebrow">Proceso Simple</span>
+                <h2 class="section-title">¿Cómo Comprar?</h2>
+                <p class="section-subtitle">Explora, elige y recibe tus prendas sin complicaciones.</p>
+            </div>
+            <div class="how-to-grid">
+                <div class="how-to-step"><div class="how-to-step-num">1</div><div class="how-to-step-icon"></div><h4>Explora y Elige</h4><p>Encuentra tu próxima pieza y elige la talla correcta.</p></div>
+                <div class="how-to-step"><div class="how-to-step-num">2</div><div class="how-to-step-icon"></div><h4>Agrega al Carrito</h4><p>Guarda tus favoritos y arma tu selección.</p></div>
+                <div class="how-to-step"><div class="how-to-step-num">3</div><div class="how-to-step-icon"></div><h4>Pago Seguro</h4><p>Finaliza con nuestros métodos protegidos.</p></div>
+                <div class="how-to-step"><div class="how-to-step-num">4</div><div class="how-to-step-icon"></div><h4>Recibe en Casa</h4><p>Seguimos tu pedido hasta tu puerta.</p></div>
+            </div>
+        </section>
+    </main>
+
+    <!-- TESTIMONIOS -->
+    <section class="section testimonials-section reveal" id="testimonios" style="width:var(--container);margin-inline:auto;">
+        <div class="section-header">
+            <span class="section-eyebrow">Opiniones Reales</span>
+            <h2 class="section-title">Lo que dicen nuestros clientes</h2>
+            <p class="section-subtitle">Más de 5.000 personas confían en Anthros para vestir su autenticidad.</p>
+        </div>
+        <div class="testimonials-carousel">
+            <div class="testimonials-track" id="testimonialsTrack">
+                <div class="testimonial-slide">
+                    <div class="testimonial-header"><div class="testimonial-avatar"></div><div class="testimonial-info"><h4>María Fernanda S.</h4><div class="testimonial-stars"></div><div class="testimonial-verified"> Compra verificada · Camiseta Essence</div></div></div>
+                    <p class="testimonial-text">"¡La calidad es IMPRESIONANTE! La tela se siente premium y las costuras son perfectas. Mi talla M me quedó justo como esperaba. Definitivamente volveré a comprar con Anthros."</p>
+                </div>
+                <div class="testimonial-slide">
+                    <div class="testimonial-header"><div class="testimonial-avatar"></div><div class="testimonial-info"><h4>Carlos Andrés R.</h4><div class="testimonial-stars"></div><div class="testimonial-verified"> Compra verificada · Camisa Lino Serenity</div></div></div>
+                    <p class="testimonial-text">"Compré la camisa de lino para una boda y ¡me robaron todos los cumplidos! Muy fresca, el corte es slim pero cómodo. Envío súper rápido en solo 2 días. 10/10."</p>
+                </div>
+                <div class="testimonial-slide">
+                    <div class="testimonial-header"><div class="testimonial-avatar"></div><div class="testimonial-info"><h4>Valentina P.</h4><div class="testimonial-stars"></div><div class="testimonial-verified"> Compra verificada · Vestido Ethereal</div></div></div>
+                    <p class="testimonial-text">"Los diseños son únicos y se nota el amor al detalle. Me encantó que hubiera guía de tallas, porque elegí la correcta a la primera. El envío fue gratis por comprar más de 5 prendas."</p>
+                </div>
+                <div class="testimonial-slide">
+                    <div class="testimonial-header"><div class="testimonial-avatar"></div><div class="testimonial-info"><h4>José Miguel L.</h4><div class="testimonial-stars"></div><div class="testimonial-verified"> Compra verificada · Camiseta Urban Cozy</div></div></div>
+                    <p class="testimonial-text">"La sudadera es una nube! Me la pongo todos los días. La felpa interior es super suave y no se ha deformado después de 10 lavados. Antohros tiene un cliente fiel en mí."</p>
+                </div>
+            </div>
+            <div class="testimonial-nav">
+                <button class="testimonial-arrow" onclick="prevTestimonial()" aria-label="Anterior testimonio"></button>
+                <div class="testimonial-dots" id="testimonialDots"></div>
+                <button class="testimonial-arrow" onclick="nextTestimonial()" aria-label="Siguiente testimonio"></button>
+            </div>
+        </div>
+    </section>
+
+    <section class="loyalty-section reveal" id="lealtad">
+        <div class="loyalty-copy">
+            <span class="section-eyebrow">Círculo Anthros</span>
+            <h2>Tu estilo también <em>acumula.</em></h2>
+            <p>Únete a nuestro programa de lealtad y convierte cada compra en beneficios que vuelven a ti.</p>
+            <div class="loyalty-perks">
+                <span><strong>01</strong> Puntos por compra</span>
+                <span><strong>02</strong> Acceso anticipado</span>
+                <span><strong>03</strong> Detalles para miembros</span>
+            </div>
+        </div>
+        <form class="loyalty-form" onsubmit="subscribeLoyalty(event)">
+            <div class="loyalty-form-heading"><span>Hazlo tuyo</span><small>Sin costo · Cancela cuando quieras</small></div>
+            <label for="loyaltyEmail">Tu correo electrónico</label>
+            <input type="email" id="loyaltyEmail" placeholder="nombre@correo.com" autocomplete="email" required>
+            <label for="loyaltyTier">Elige tu ritmo</label>
+            <select id="loyaltyTier">
+                <option value="esencial">Esencial · Para descubrir</option>
+                <option value="frecuente">Frecuente · Para volver</option>
+                <option value="embajador">Embajador · Para inspirar</option>
+            </select>
+            <button type="submit" class="loyalty-btn">Unirme al Círculo <span></span></button>
+            <p class="loyalty-note">Al registrarte aceptas recibir novedades seleccionadas de Anthros.</p>
+        </form>
+    </section>
+
+    <aside class="newsletter-float" id="newsletterFloat" aria-label="Suscripción al newsletter">
+        <button class="newsletter-float-close" type="button" onclick="closeNewsletterFloat()" aria-label="Cerrar suscripción">×</button>
+        <span class="newsletter-float-label">Notas de Anthros</span>
+        <h2>Una buena prenda empieza con una buena historia.</h2>
+        <p>Recibe novedades de colección y obtén <strong>10% de descuento</strong> en tu primera compra.</p>
+        <form class="newsletter-form" onsubmit="subscribeNewsletter(event)">
+            <input type="email" class="newsletter-input" id="newsletterEmail" placeholder="Tu correo electrónico" required>
+            <button type="submit" class="newsletter-btn">Suscribirme <span></span></button>
+        </form>
+    </aside>
+
+    <!-- CONTACTO -->
+    <main style="padding-bottom: 0;">
+        <section class="section reveal" id="contacto">
+            <div class="section-header">
+                <span class="section-eyebrow">Estamos Aquí</span>
+                <h2 class="section-title">Contáctanos</h2>
+                <p class="section-subtitle">¿Tienes alguna pregunta o necesitas ayuda? Nuestro equipo está listo para acompañarte en tu experiencia Anthros.</p>
+            </div>
+            <div class="contact-grid">
+                <div class="contact-item reveal"><span class="contact-icon"></span><h3>Visítanos</h3><p>Carrera 43 #75-130<br>Barranquilla, Colombia</p></div>
+                <div class="contact-item reveal"><span class="contact-icon"></span><h3>Llámanos</h3><p>+57 (5) 123-4567<br>WhatsApp: +57 300-123-4567</p></div>
+                <div class="contact-item reveal"><span class="contact-icon"></span><h3>Escríbenos</h3><p>hola@anthros.com<br>ventas@anthros.com</p></div>
+                <div class="contact-item reveal"><span class="contact-icon"></span><h3>Horario</h3><p>Lun - Vie: 9:00 - 19:00<br>Sáb: 10:00 - 16:00</p></div>
+            </div>
+        </section>
+    </main>
+
+    <!-- FOOTER (enlaces a páginas reales) -->
+    <footer>
+        <div class="footer-inner">
+            <div class="footer-brand">ANTHROS</div>
+            <p class="footer-tagline">"Viste tu autenticidad. Vive tu esencia."</p>
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h4>Sobre Nosotros</h4>
+                    <p>Marca colombiana de moda premium. Creamos prendas que combinan diseño atemporal, calidad excepcional y producción consciente.</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Colección</h4>
+                    <ul>
+                        <li><a href="./catalogo.html" onclick="event.preventDefault();navigateTo('catalogo');">Ver Catálogo Completo</a></li>
+                        <li><a href="./catalogo.html" onclick="event.preventDefault();navigateTo('catalogo');">Hombres</a></li>
+                        <li><a href="./catalogo.html" onclick="event.preventDefault();navigateTo('catalogo');">Mujeres</a></li>
+                        <li><a href="./catalogo.html" onclick="event.preventDefault();navigateTo('catalogo');">Nuevos</a></li>
+                        <li><a href="./catalogo.html" onclick="event.preventDefault();navigateTo('catalogo');">Ofertas</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Ayuda</h4>
+                    <ul>
+                        <li><a href="./index.html#contacto" onclick="event.preventDefault();navigateTo('home','contacto');">Contacto</a></li>
+                        <li><a href="#" onclick="event.preventDefault();showFAQModal();">Preguntas Frecuentes</a></li>
+                        <li><a href="#" onclick="event.preventDefault();showSizeGuideModal();">Guía de Tallas</a></li>
+                        <li><a href="./carrito.html" onclick="event.preventDefault();navigateTo('carrito');">Mi Carrito</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Legal</h4>
+                    <ul>
+                        <li><a href="./terminos.html">Términos y Condiciones</a></li>
+                        <li><a href="./privacidad.html">Política de Privacidad</a></li>
+                        <li><a href="./garantias.html">Cambios y Devoluciones</a></li>
+                        <li><a href="./garantias.html">Garantía y Calidad</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-social">
+                <a href="#" class="social-icon" title="Instagram" aria-label="Instagram"></a>
+                <a href="#" class="social-icon" title="Facebook" aria-label="Facebook"></a>
+                <a href="#" class="social-icon" title="TikTok" aria-label="TikTok"></a>
+                <a href="#" class="social-icon" title="WhatsApp" aria-label="WhatsApp"></a>
+            </div>
+            <div class="footer-bottom">
+                <p> 2024 ANTHROS  Todos los derechos reservados</p>
+                <p>Hecho con  pasión por la moda colombiana · Barranquilla, Colombia</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- UI COMPARTIDA: scroll top, toast, cart modal -->
+    <button class="scroll-top" id="scrollTop" onclick="scrollToTop()" aria-label="Volver arriba"></button>
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+    <div class="cart-modal" id="cartModal" onclick="closeCartOutside(event)" role="dialog" aria-modal="true" aria-label="Carrito de compras">
+        <div class="cart-panel" onclick="event.stopPropagation()">
+            <div class="cart-header">
+                <h3> Tu Carrito</h3>
+                <button class="cart-close" onclick="toggleCart()" aria-label="Cerrar carrito">×</button>
+            </div>
+            <div class="promo-section">
+                <div class="promo-input-wrapper">
+                    <input type="text" class="promo-input" id="promoInput" placeholder="Código de descuento (ej: BIENVENIDO)">
+                    <button class="promo-btn" onclick="applyPromo()">Aplicar</button>
+                </div>
+                <div class="promo-message" id="promoMessage"></div>
+            </div>
+            <div class="cart-items" id="cartItems"></div>
+            <div class="cart-summary" id="cartSummary">
+                <div class="cart-empty" id="cartEmpty">
+                    <div class="cart-empty-icon"></div>
+                    <p>Tu carrito está vacío</p>
+                    <p>¡Añade prendas para comenzar tu experiencia Anthros!</p>
+                </div>
+            </div>
+            <button class="checkout-btn" id="checkoutBtn" style="display:none;" onclick="checkout()">Finalizar Compra</button>
+            <div style="padding: 8px 18px 18px;">
+                <a href="./carrito.html" class="qv-btn-secondary" style="display:block;text-align:center;text-decoration:none;margin-top:8px;" onclick="event.preventDefault();toggleCart();navigateTo('carrito');"> Ver Carrito Completo </a>
+            </div>
+        </div>
+    </div>
+
+    <script src="./assets/js/services/index.js?v=anthros-catalog-2"></script>
+    <script src="./assets/js/calculos.js"></script>
+    <script src="./assets/js/assistant-knowledge.js?v=1"></script>
+    <script src="./assets/js/app.js?v=anthros-catalog-4"></script>
+</body>
+</html>
