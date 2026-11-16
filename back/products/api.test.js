@@ -113,6 +113,10 @@ test('products API covers public search and authenticated CRUD with useful error
     assert.equal(byId.response.status, 200);
     assert.equal(byId.payload.products[0].name, 'Essential Tee Marfil');
 
+    const byOrigin = await request('/api/products?field=origin&value=Medell%C3%ADn');
+    assert.equal(byOrigin.response.status, 200);
+    assert.ok(byOrigin.payload.products.every(product => product.origin.includes('Medellín')));
+
     const invalidSearch = await request('/api/products?field=password&value=x');
     assert.equal(invalidSearch.response.status, 400);
     assert.equal(invalidSearch.payload.error.code, 'INVALID_SEARCH_FIELD');

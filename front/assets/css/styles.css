@@ -52,7 +52,7 @@
             --container: min(100% - 32px, 1160px);
             --font-display: 'Georgia', 'Times New Roman', serif;
             --font-body: 'Segoe UI', system-ui, -apple-system, sans-serif;
-            --hero-image: url('../images/Brisas%20de%20Identidad%20%20Fresco%2C%20holgado%20y%20sostenible%20%281%29.jfif');
+            --hero-image: url('../images/Prom/Brisas%20de%20Identidad%20%20Fresco%2C%20holgado%20y%20sostenible%20%281%29.jfif');
             --fs-xs: clamp(0.72rem, 0.70rem + 0.1vw, 0.78rem);
             --fs-sm: clamp(0.82rem, 0.78rem + 0.2vw, 0.9rem);
             --fs-base: clamp(0.92rem, 0.88rem + 0.25vw, 1rem);
@@ -899,7 +899,7 @@
         .clear-filters-btn { min-height: 40px; padding: 9px 12px; border: 1px solid var(--red-primary); border-radius: var(--radius-sm); color: var(--red-primary); font-size: var(--fs-xs); font-weight: 800; }
         .clear-filters-btn:hover { background: var(--red-primary); color: var(--cream-light); }
 
-        .about-page-hero { min-height: 420px; background: linear-gradient(105deg, rgba(55,6,23,0.96), rgba(120,0,0,0.74)), url('../images/Brisas%20de%20Identidad%20%20Fresco%2C%20holgado%20y%20sostenible%20%289%29.jfif') center/cover; color: var(--cream-light); display: flex; align-items: end; }
+        .about-page-hero { min-height: 420px; background: linear-gradient(105deg, rgba(55,6,23,0.96), rgba(120,0,0,0.74)), url('../images/Catalogo/Brisas%20de%20Identidad%20%20Fresco%2C%20holgado%20y%20sostenible%20%289%29.jfif') center/cover; color: var(--cream-light); display: flex; align-items: end; }
         .about-page-hero-inner { width: var(--container); margin: 0 auto; padding: 74px 0 68px; }
         .breadcrumb { display: flex; gap: 9px; margin-bottom: 28px; color: rgba(255,248,240,0.65); font-size: var(--fs-xs); }
         .about-page-hero h1 { max-width: 760px; margin: 12px 0 18px; font: 700 clamp(2.8rem, 7vw, 6rem)/0.98 var(--font-display); letter-spacing: 0; }
@@ -932,7 +932,7 @@
         .contact-about address a { color: var(--orange-soft); font-size: var(--fs-lg); font-weight: 700; }
         .contact-about address span { color: rgba(255,248,240,0.7); }
 
-        .legal-hero, .checkout-hero { min-height: 330px; display: flex; align-items: end; background: linear-gradient(105deg, rgba(55,6,23,0.97), rgba(120,0,0,0.78)), url('../images/Brisas%20de%20Identidad%20%20Fresco%2C%20holgado%20y%20sostenible%20%281%29.jfif') center/cover; color: var(--cream-light); }
+        .legal-hero, .checkout-hero { min-height: 330px; display: flex; align-items: end; background: linear-gradient(105deg, rgba(55,6,23,0.97), rgba(120,0,0,0.78)), url('../images/Prom/Brisas%20de%20Identidad%20%20Fresco%2C%20holgado%20y%20sostenible%20%281%29.jfif') center/cover; color: var(--cream-light); }
         .legal-hero > div, .checkout-hero > div { width: var(--container); margin: 0 auto; padding: 64px 0 54px; }
         .legal-hero h1, .checkout-hero h1 { max-width: 800px; margin: 12px 0; font: 700 clamp(2.5rem, 6vw, 5rem)/1 var(--font-display); }
         .legal-hero p, .checkout-hero p { color: rgba(255,248,240,0.78); font-size: var(--fs-lg); }

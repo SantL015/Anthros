@@ -166,10 +166,10 @@ function validateProduct(input, { partial = false } = {}) {
     } else if (!partial) {
         product.img = cleanText(input.img, 'img', errors, { maxLength: 180 });
     }
-    if (product.img && !/^\/assets\/images\/[A-Za-z0-9()[\]. ,_-]+$/.test(product.img)) {
+    if (product.img && !/^\/assets\/images\/(?:[A-Za-z0-9()[\]. ,_-]+|(?:Catalogo|Prom)\/[A-Za-z0-9()[\]. ,_-]+)$/.test(product.img)) {
         errors.img = 'La imagen debe estar dentro de /assets/images/';
     }
-    if (product.hoverImg && !/^\/assets\/images\/[A-Za-z0-9()[\]. ,_-]+$/.test(product.hoverImg)) {
+    if (product.hoverImg && !/^\/assets\/images\/(?:[A-Za-z0-9()[\]. ,_-]+|(?:Catalogo|Prom)\/[A-Za-z0-9()[\]. ,_-]+)$/.test(product.hoverImg)) {
         errors.hoverImg = 'La imagen debe estar dentro de /assets/images/';
     }
 

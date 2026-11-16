@@ -10,20 +10,34 @@
     "discount": 20,
     "isNew": false,
     "badge": "-20%",
-    "sizes": ["S", "M", "L"],
+    "sizes": [
+      "XS",
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
     "collection": "Brisas de Identidad",
     "year": 2026,
     "material": "Algodón orgánico 100%",
-    "colors": ["Marfil", "Terracota"],
+    "colors": [
+      "Marfil",
+      "Terracota"
+    ],
     "shipping": "3-5 días hábiles",
     "care": "Lavar en frío y secar a la sombra",
-    "img": "/assets/images/Brisas de Identidad  Fresco, holgado y sostenible (3).jfif",
+    "img": "/assets/images/Prom/Brisas de Identidad  Fresco, holgado y sostenible (3).jfif",
     "desc": "Una base suave y transpirable de algodón orgánico, con manga larga y silueta relajada. Sus tonos marfil y terracota hacen fácil combinarla durante todo el año.",
-    "hoverImg": "/assets/images/Brisas de Identidad  Fresco, holgado y sostenible (2).jfif",
+    "hoverImg": "/assets/images/Prom/Brisas de Identidad  Fresco, holgado y sostenible (2).jfif",
     "cut": "Relaxed Fit",
-    "sustainability": { "material": "Algodón orgánico 100%", "impact": "Diseñada para un uso duradero", "cert": "" },
+    "sustainability": {
+      "material": "Algodón orgánico 100%",
+      "impact": "Diseñada para un uso duradero",
+      "cert": ""
+    },
     "rating": 5,
-    "reviews": 124
+    "reviews": 124,
+    "origin": "Talleres aliados de Bogotá y Medellín"
   },
   {
     "id": 2,
@@ -36,20 +50,34 @@
     "discount": 0,
     "isNew": true,
     "badge": "Nuevo",
-    "sizes": ["S", "M", "L", "XL"],
+    "sizes": [
+      "XS",
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
     "collection": "Brisas de Identidad",
     "year": 2026,
     "material": "Lino europeo certificado",
-    "colors": ["Arena", "Blanco humo"],
+    "colors": [
+      "Arena",
+      "Blanco humo"
+    ],
     "shipping": "3-5 días hábiles",
     "care": "Lavar a mano y planchar a baja temperatura",
-    "img": "/assets/images/Brisas de Identidad  Fresco, holgado y sostenible (13).jfif",
+    "img": "/assets/images/Catalogo/Brisas de Identidad  Fresco, holgado y sostenible (13).jfif",
     "desc": "Camisa de lino ligero y transpirable, con una silueta relajada que acompaña tanto los días cálidos como los planes especiales. Disponible en arena y blanco humo.",
-    "hoverImg": "/assets/images/Brisas de Identidad  Fresco, holgado y sostenible (11).jfif",
+    "hoverImg": "/assets/images/Catalogo/Brisas de Identidad  Fresco, holgado y sostenible (11).jfif",
     "cut": "Relaxed Fit",
-    "sustainability": { "material": "Lino europeo certificado", "impact": "Fibra natural y biodegradable", "cert": "European Flax® · OEKO-TEX" },
+    "sustainability": {
+      "material": "Lino europeo certificado",
+      "impact": "Fibra natural y biodegradable",
+      "cert": "European Flax® · OEKO-TEX"
+    },
     "rating": 4,
-    "reviews": 87
+    "reviews": 87,
+    "origin": "Talleres aliados de Bogotá y Medellín"
   },
   {
     "id": 3,
@@ -62,20 +90,34 @@
     "discount": 15,
     "isNew": false,
     "badge": "-15%",
-    "sizes": ["S", "M", "L", "XL"],
+    "sizes": [
+      "XS",
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
     "collection": "Essentials",
     "year": 2026,
     "material": "Algodón peinado 100%",
-    "colors": ["Blanco óptico", "Negro carbón"],
+    "colors": [
+      "Blanco óptico",
+      "Negro carbón"
+    ],
     "shipping": "3-5 días hábiles",
     "care": "Lavar del revés en ciclo suave",
-    "img": "/assets/images/Brisas de Identidad  Fresco, holgado y sostenible (14).jfif",
+    "img": "/assets/images/Catalogo/Brisas de Identidad  Fresco, holgado y sostenible (14).jfif",
     "desc": "Un básico de algodón peinado con corte oversize y una paleta clásica en blanco óptico y negro carbón. Una pieza fácil de llevar sola o como primera capa.",
-    "hoverImg": "/assets/images/Brisas de Identidad  Fresco, holgado y sostenible (10).jfif",
+    "hoverImg": "/assets/images/Catalogo/Brisas de Identidad  Fresco, holgado y sostenible (10).jfif",
     "cut": "Oversize",
-    "sustainability": { "material": "Algodón peinado", "impact": "", "cert": "" },
+    "sustainability": {
+      "material": "Algodón peinado",
+      "impact": "",
+      "cert": ""
+    },
     "rating": 5,
-    "reviews": 312
+    "reviews": 312,
+    "origin": "Talleres aliados de Bogotá y Medellín"
   },
   {
     "id": 4,
@@ -88,20 +130,34 @@
     "discount": 0,
     "isNew": false,
     "badge": "",
-    "sizes": ["S", "M", "L"],
+    "sizes": [
+      "XS",
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
     "collection": "Brisas de Identidad",
     "year": 2025,
     "material": "Algodón y lino",
-    "colors": ["Arena", "Marfil"],
+    "colors": [
+      "Arena",
+      "Marfil"
+    ],
     "shipping": "3-5 días hábiles",
     "care": "Lavar en frío con colores similares",
-    "img": "/assets/images/Brisas de Identidad  Fresco, holgado y sostenible (11).jfif",
+    "img": "/assets/images/Catalogo/Brisas de Identidad  Fresco, holgado y sostenible (11).jfif",
     "desc": "Camisa de rayas verticales en una mezcla ligera de algodón y lino, con un aire costero y corte regular. Sus tonos arena y marfil funcionan para salidas cotidianas y días soleados.",
-    "hoverImg": "/assets/images/Brisas de Identidad  Fresco, holgado y sostenible (13).jfif",
+    "hoverImg": "/assets/images/Catalogo/Brisas de Identidad  Fresco, holgado y sostenible (13).jfif",
     "cut": "Regular",
-    "sustainability": { "material": "Algodón y lino", "impact": "Fibras de origen natural", "cert": "" },
+    "sustainability": {
+      "material": "Algodón y lino",
+      "impact": "Fibras de origen natural",
+      "cert": ""
+    },
     "rating": 4,
-    "reviews": 58
+    "reviews": 58,
+    "origin": "Talleres aliados de Bogotá y Medellín"
   },
   {
     "id": 5,
@@ -114,20 +170,33 @@
     "discount": 30,
     "isNew": false,
     "badge": "-30%",
-    "sizes": ["S", "M", "L", "XL"],
+    "sizes": [
+      "XS",
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
     "collection": "Eclipse Urbano",
     "year": 2025,
     "material": "Algodón de tacto suave",
-    "colors": ["Gris humo"],
+    "colors": [
+      "Gris humo"
+    ],
     "shipping": "3-5 días hábiles",
     "care": "Lavar del revés en ciclo suave",
-    "img": "/assets/images/Coleccion essentials (2).jfif",
+    "img": "/assets/images/Catalogo/Coleccion essentials (2).jfif",
     "desc": "Camiseta de silueta oversize en gris humo, una capa ligera y versátil con carácter urbano. Combínala con tus básicos favoritos y lávala del revés en ciclo suave.",
-    "hoverImg": "/assets/images/Brisas de Identidad  Fresco, holgado y sostenible (10).jfif",
+    "hoverImg": "/assets/images/Catalogo/Brisas de Identidad  Fresco, holgado y sostenible (10).jfif",
     "cut": "Oversize",
-    "sustainability": { "material": "Algodón de tacto suave", "impact": "", "cert": "" },
+    "sustainability": {
+      "material": "Algodón de tacto suave",
+      "impact": "",
+      "cert": ""
+    },
     "rating": 5,
-    "reviews": 201
+    "reviews": 201,
+    "origin": "Talleres aliados de Bogotá y Medellín"
   },
   {
     "id": 6,
@@ -140,20 +209,34 @@
     "discount": 0,
     "isNew": true,
     "badge": "Nuevo",
-    "sizes": ["XS", "S", "M", "L"],
+    "sizes": [
+      "XS",
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
     "collection": "Brisas de Identidad",
     "year": 2026,
     "material": "Viscosa ECOVERO",
-    "colors": ["Rosa arcilla", "Verde salvia"],
+    "colors": [
+      "Rosa arcilla",
+      "Verde salvia"
+    ],
     "shipping": "3-5 días hábiles",
     "care": "Lavar a mano y colgar para secar",
-    "img": "/assets/images/Brisas de Identidad  Fresco, holgado y sostenible (5).jfif",
+    "img": "/assets/images/Catalogo/Brisas de Identidad  Fresco, holgado y sostenible (5).jfif",
     "desc": "Vestido de viscosa ECOVERO con caída ligera y una silueta pensada para moverse con comodidad. Los tonos rosa arcilla y verde salvia aportan color sin perder versatilidad. Lavar a mano y colgar para secar.",
-    "hoverImg": "/assets/images/Brisas de Identidad  Fresco, holgado y sostenible (6).jfif",
+    "hoverImg": "/assets/images/Prom/Brisas de Identidad  Fresco, holgado y sostenible (6).jfif",
     "cut": "Relaxed Fit",
-    "sustainability": { "material": "Viscosa ECOVERO", "impact": "Fibra de origen celulósico", "cert": "" },
+    "sustainability": {
+      "material": "Viscosa ECOVERO",
+      "impact": "Fibra de origen celulósico",
+      "cert": ""
+    },
     "rating": 5,
-    "reviews": 76
+    "reviews": 76,
+    "origin": "Talleres aliados de Bogotá y Medellín"
   },
   {
     "id": 7,
@@ -166,20 +249,33 @@
     "discount": 0,
     "isNew": true,
     "badge": "ESENCIAL",
-    "sizes": ["XS", "S", "M", "L", "XL"],
+    "sizes": [
+      "XS",
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
     "collection": "Essentials",
     "year": 2026,
     "material": "Algodón peinado de tacto suave",
-    "colors": ["Marfil"],
+    "colors": [
+      "Marfil"
+    ],
     "shipping": "3-5 días hábiles",
     "care": "Lavar en frío y secar a la sombra",
-    "img": "/assets/images/Brisas de Identidad  Fresco, holgado y sostenible (10).jfif",
+    "img": "/assets/images/Catalogo/Brisas de Identidad  Fresco, holgado y sostenible (10).jfif",
     "desc": "Una camiseta unisex de algodón peinado, suave al tacto y de silueta amplia. Su tono marfil y diseño limpio la convierten en un básico fácil de combinar.",
-    "hoverImg": "/assets/images/Brisas de Identidad  Fresco, holgado y sostenible (14).jfif",
+    "hoverImg": "/assets/images/Catalogo/Brisas de Identidad  Fresco, holgado y sostenible (14).jfif",
     "cut": "Wide",
-    "sustainability": { "material": "Algodón peinado", "impact": "", "cert": "" },
+    "sustainability": {
+      "material": "Algodón peinado",
+      "impact": "",
+      "cert": ""
+    },
     "rating": 0,
-    "reviews": 0
+    "reviews": 0,
+    "origin": "Talleres aliados de Bogotá y Medellín"
   },
   {
     "id": 8,
@@ -192,24 +288,38 @@
     "discount": 0,
     "isNew": true,
     "badge": "EDICIÓN FRESCA",
-    "sizes": ["S", "M", "L", "XL"],
+    "sizes": [
+      "XS",
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
     "collection": "Brisas de Identidad",
     "year": 2026,
     "material": "Lino y algodón",
-    "colors": ["Arena", "Blanco humo"],
+    "colors": [
+      "Arena",
+      "Blanco humo"
+    ],
     "shipping": "3-5 días hábiles",
     "care": "Lavar a mano y secar a la sombra",
-    "img": "/assets/images/Brisas de Identidad  Fresco, holgado y sostenible (11).jfif",
+    "img": "/assets/images/Catalogo/Brisas de Identidad  Fresco, holgado y sostenible (11).jfif",
     "desc": "Camisa unisex de lino y algodón con una silueta amplia, ligera y fácil de combinar. Los tonos arena y blanco humo acompañan su carácter fresco; lavar a mano y secar a la sombra.",
-    "hoverImg": "/assets/images/Brisas de Identidad  Fresco, holgado y sostenible (13).jfif",
+    "hoverImg": "/assets/images/Catalogo/Brisas de Identidad  Fresco, holgado y sostenible (13).jfif",
     "cut": "Wide",
-    "sustainability": { "material": "Mezcla de lino y algodón", "impact": "Transpirabilidad natural de las fibras", "cert": "" },
+    "sustainability": {
+      "material": "Mezcla de lino y algodón",
+      "impact": "Transpirabilidad natural de las fibras",
+      "cert": ""
+    },
     "rating": 0,
-    "reviews": 0
+    "reviews": 0,
+    "origin": "Talleres aliados de Bogotá y Medellín"
   },
   {
     "id": 9,
-    "name": "Sobrecamisa Arquitectónica",
+    "name": "Sobrecamisa Arquitectónica Noche",
     "category": "unisex nuevos",
     "gender": "Unisex",
     "line": "Sobrecamisas",
@@ -218,24 +328,37 @@
     "discount": 0,
     "isNew": true,
     "badge": "Nuevo",
-    "sizes": ["S", "M", "L", "XL"],
-    "collection": "Brisas de Identidad",
+    "sizes": [
+      "XS",
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "collection": "Eclipse Urbano",
     "year": 2026,
-    "material": "Lino y algodón",
-    "colors": ["Negro obsidiana"],
+    "material": "Dril de algodón orgánico 340 g/m²",
+    "colors": [
+      "Negro obsidiana"
+    ],
     "shipping": "3-5 días hábiles",
     "care": "Lavar en frío y secar a la sombra",
-    "img": "/assets/images/Gemini_Generated_Image_9gsghg9gsghg9gsg.jpg",
-    "desc": "Una capa ligera de líneas precisas y volumen relajado. La mezcla de lino y algodón aporta textura natural para llevarla abierta sobre una camiseta o como pieza protagonista.",
-    "hoverImg": "/assets/images/Gemini_Generated_Image_jejpt9jejpt9jejp.jpg",
+    "img": "/assets/images/Catalogo/Gemini_Generated_Image_9gsghg9gsghg9gsg.jpg",
+    "desc": "Sobrecamisa de dril de algodón orgánico de 340 g/m², con estructura firme, bolsillos frontales y corte relajado. Confeccionada en talleres aliados de Bogotá y Medellín.",
+    "hoverImg": "/assets/images/Catalogo/Gemini_Generated_Image_9gsghg9gsghg9gsg.jpg",
     "cut": "Relaxed Fit",
-    "sustainability": { "material": "Lino y algodón", "impact": "Fibras de origen natural", "cert": "" },
+    "sustainability": {
+      "material": "Dril de algodón orgánico 340 g/m²",
+      "impact": "Producción local en talleres aliados de Bogotá y Medellín.",
+      "cert": ""
+    },
     "rating": 0,
-    "reviews": 0
+    "reviews": 0,
+    "origin": "Talleres aliados de Bogotá y Medellín"
   },
   {
     "id": 10,
-    "name": "Hoodie Pesado",
+    "name": "Hoodie Pesado Eclipse",
     "category": "unisex nuevos",
     "gender": "Unisex",
     "line": "Hoodies",
@@ -244,20 +367,33 @@
     "discount": 0,
     "isNew": true,
     "badge": "Nuevo",
-    "sizes": ["S", "M", "L", "XL"],
+    "sizes": [
+      "XS",
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
     "collection": "Eclipse Urbano",
     "year": 2026,
-    "material": "Algodón perchado de alto gramaje",
-    "colors": ["Gris humo"],
+    "material": "French Terry carbón lavado 420 g/m²",
+    "colors": [
+      "Carbón lavado"
+    ],
     "shipping": "3-5 días hábiles",
     "care": "Lavar del revés en ciclo suave",
-    "img": "/assets/images/Gemini_Generated_Image_uvhojbuvhojbuvho.jpg",
-    "desc": "Felpa de alto gramaje, hombro caído y estructura envolvente: abrigo cómodo con una silueta urbana que conserva su forma y acompaña el ritmo diario.",
-    "hoverImg": "/assets/images/Gemini_Generated_Image_uvhojbuvhojbuvho.jpg",
+    "img": "/assets/images/Prom/Gemini_Generated_Image_uvhojbuvhojbuvho.jpg",
+    "desc": "Hoodie de French Terry carbón lavado de 420 g/m², con capucha, bolsillo canguro y silueta amplia. Confeccionado en talleres aliados de Bogotá y Medellín.",
+    "hoverImg": "/assets/images/Prom/Gemini_Generated_Image_uvhojbuvhojbuvho.jpg",
     "cut": "Oversize",
-    "sustainability": { "material": "Algodón perchado", "impact": "Diseñada para acompañar varias temporadas", "cert": "" },
+    "sustainability": {
+      "material": "French Terry carbón lavado 420 g/m²",
+      "impact": "Producción local en talleres aliados de Bogotá y Medellín.",
+      "cert": ""
+    },
     "rating": 0,
-    "reviews": 0
+    "reviews": 0,
+    "origin": "Talleres aliados de Bogotá y Medellín"
   },
   {
     "id": 11,
@@ -270,20 +406,33 @@
     "discount": 0,
     "isNew": true,
     "badge": "Nuevo",
-    "sizes": ["XS", "S", "M", "L", "XL"],
+    "sizes": [
+      "XS",
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
     "collection": "Eclipse Urbano",
     "year": 2026,
     "material": "Algodón pesado 240 g/m²",
-    "colors": ["Gris grafito"],
+    "colors": [
+      "Gris grafito"
+    ],
     "shipping": "3-5 días hábiles",
     "care": "Lavar del revés en ciclo suave",
-    "img": "/assets/images/Gemini_Generated_Image_cxyvm0cxyvm0cxyv.jpg",
+    "img": "/assets/images/Prom/Gemini_Generated_Image_cxyvm0cxyvm0cxyv.jpg",
     "desc": "Algodón compacto de tacto firme, cuello reforzado y caída recta. En gris grafito, esta camiseta esencial tiene presencia propia y está pensada para combinar capas.",
-    "hoverImg": "/assets/images/Gemini_Generated_Image_cxyvm0cxyvm0cxyv.jpg",
+    "hoverImg": "/assets/images/Prom/Gemini_Generated_Image_cxyvm0cxyvm0cxyv.jpg",
     "cut": "Regular",
-    "sustainability": { "material": "Algodón de alto gramaje", "impact": "Construcción pensada para un uso prolongado", "cert": "" },
+    "sustainability": {
+      "material": "Algodón de alto gramaje",
+      "impact": "Construcción pensada para un uso prolongado",
+      "cert": ""
+    },
     "rating": 0,
-    "reviews": 0
+    "reviews": 0,
+    "origin": "Talleres aliados de Bogotá y Medellín"
   },
   {
     "id": 12,
@@ -296,24 +445,38 @@
     "discount": 0,
     "isNew": true,
     "badge": "Nuevo",
-    "sizes": ["S", "M", "L", "XL"],
+    "sizes": [
+      "XS",
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
     "collection": "Eclipse Urbano",
     "year": 2026,
     "material": "Algodón twill",
-    "colors": ["Oliva", "Negro obsidiana"],
+    "colors": [
+      "Oliva",
+      "Negro obsidiana"
+    ],
     "shipping": "3-5 días hábiles",
     "care": "Lavar en frío con colores similares",
-    "img": "/assets/images/Gemini_Generated_Image_cq5ypccq5ypccq5y.jpg",
-    "desc": "Twill resistente, bolsillos funcionales y pierna relajada para moverse con libertad. El diseño depurado equilibra practicidad y una silueta urbana fácil de vestir.",
-    "hoverImg": "/assets/images/Gemini_Generated_Image_cq5ypccq5ypccq5y.jpg",
+    "img": "/assets/images/Catalogo/Gemini_Generated_Image_cq5ypccq5ypccq5y.jpg",
+    "desc": "Pantalón utilitario de algodón twill con bolsillos funcionales y pierna relajada. Su construcción práctica acompaña el uso diario; confeccionado en talleres aliados de Bogotá y Medellín.",
+    "hoverImg": "/assets/images/Catalogo/Gemini_Generated_Image_cq5ypccq5ypccq5y.jpg",
     "cut": "Relaxed Fit",
-    "sustainability": { "material": "Algodón twill", "impact": "Tejido resistente para mayor vida útil", "cert": "" },
+    "sustainability": {
+      "material": "Algodón twill",
+      "impact": "Tejido resistente para mayor vida útil",
+      "cert": ""
+    },
     "rating": 0,
-    "reviews": 0
+    "reviews": 0,
+    "origin": "Talleres aliados de Bogotá y Medellín"
   },
   {
     "id": 13,
-    "name": "Jean Streetwear",
+    "name": "Jean Eclipse de corte relaxed",
     "category": "unisex nuevos",
     "gender": "Unisex",
     "line": "Denim",
@@ -322,45 +485,72 @@
     "discount": 0,
     "isNew": true,
     "badge": "Nuevo",
-    "sizes": ["S", "M", "L", "XL"],
+    "sizes": [
+      "XS",
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
     "collection": "Eclipse Urbano",
     "year": 2026,
     "material": "Denim de algodón",
-    "colors": ["Negro lavado"],
+    "colors": [
+      "Negro lavado"
+    ],
     "shipping": "3-5 días hábiles",
     "care": "Lavar del revés con agua fría",
-    "img": "/assets/images/Gemini_Generated_Image_m2wvufm2wvufm2wv.jpg",
-    "desc": "Denim negro lavado de corte amplio y caída limpia. Un jean versátil de espíritu streetwear que funciona con camisetas, básicos y capas estructuradas.",
-    "hoverImg": "/assets/images/Gemini_Generated_Image_m2wvufm2wvufm2wv.jpg",
-    "cut": "Wide",
-    "sustainability": { "material": "Denim de algodón", "impact": "Lavar en frío para prolongar su vida útil", "cert": "" },
+    "img": "/assets/images/Catalogo/Gemini_Generated_Image_m2wvufm2wvufm2wv.jpg",
+    "desc": "Jean Eclipse de denim de algodón negro lavado y corte relaxed, con pierna amplia y caída recta. Confeccionado en talleres aliados de Bogotá y Medellín.",
+    "hoverImg": "/assets/images/Catalogo/Gemini_Generated_Image_m2wvufm2wvufm2wv.jpg",
+    "cut": "Relaxed Fit",
+    "sustainability": {
+      "material": "Denim de algodón",
+      "impact": "Lavar en frío para prolongar su vida útil",
+      "cert": ""
+    },
     "rating": 0,
-    "reviews": 0
+    "reviews": 0,
+    "origin": "Talleres aliados de Bogotá y Medellín"
   },
   {
     "id": 14,
-    "name": "Sudadera Streetwear",
+    "name": "Sudadera Streetwear Holgada",
     "category": "unisex nuevos",
     "gender": "Unisex",
-    "line": "Sudaderas",
+    "line": "Pantalones",
     "price": 169900,
     "originalPrice": null,
     "discount": 0,
     "isNew": true,
     "badge": "Nuevo",
-    "sizes": ["S", "M", "L", "XL"],
+    "sizes": [
+      "XS",
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
     "collection": "Eclipse Urbano",
     "year": 2026,
     "material": "Algodón perchado",
-    "colors": ["Gris humo", "Negro obsidiana"],
+    "colors": [
+      "Gris humo",
+      "Negro obsidiana"
+    ],
     "shipping": "3-5 días hábiles",
     "care": "Lavar del revés en ciclo suave",
-    "img": "/assets/images/Gemini_Generated_Image_xmkch8xmkch8xmkc.jpg",
-    "desc": "Una sudadera de tacto suave y volumen cómodo, con puños firmes y acabado limpio. Su paleta sobria la convierte en una capa cotidiana con identidad urbana.",
-    "hoverImg": "/assets/images/Gemini_Generated_Image_xmkch8xmkch8xmkc.jpg",
+    "img": "/assets/images/Catalogo/Gemini_Generated_Image_xmkch8xmkch8xmkc.jpg",
+    "desc": "Pantalón tipo sudadera de silueta streetwear holgada, con cintura elástica, cordón ajustable y puños en el bajo. Confeccionado en talleres aliados de Bogotá y Medellín.",
+    "hoverImg": "/assets/images/Catalogo/Gemini_Generated_Image_xmkch8xmkch8xmkc.jpg",
     "cut": "Relaxed Fit",
-    "sustainability": { "material": "Algodón perchado", "impact": "Diseñada para un uso prolongado", "cert": "" },
+    "sustainability": {
+      "material": "Algodón perchado",
+      "impact": "Diseñada para un uso prolongado",
+      "cert": ""
+    },
     "rating": 0,
-    "reviews": 0
+    "reviews": 0,
+    "origin": "Talleres aliados de Bogotá y Medellín"
   }
 ]

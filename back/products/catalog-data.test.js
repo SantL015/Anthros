@@ -8,6 +8,7 @@ const { validateProduct } = require('./validate-product');
 
 const root = path.resolve(__dirname, '..', '..');
 const aboutPage = fs.readFileSync(path.join(root, 'front', 'nosotros.html'), 'utf8');
+const appSource = fs.readFileSync(path.join(root, 'front', 'assets', 'js', 'app.js'), 'utf8');
 const requiredNames = [
     'Sobrecamisa Arquitectónica Noche',
     'Hoodie Pesado Eclipse',
@@ -25,7 +26,7 @@ const expectedImages = {
     'Sudadera Streetwear Holgada': 'Gemini_Generated_Image_xmkch8xmkch8xmkc.jpg'
 };
 const requiredSpecifications = {
-    'Sobrecamisa Arquitectónica Noche': 'dril de algodón orgánico 340 g/m²',
+    'Sobrecamisa Arquitectónica Noche': 'Dril de algodón orgánico 340 g/m²',
     'Hoodie Pesado Eclipse': 'French Terry carbón lavado 420 g/m²'
 };
 
@@ -34,6 +35,10 @@ test('el catálogo y el seed incluyen las nuevas piezas con imágenes disponible
         const products = JSON.parse(fs.readFileSync(path.join(root, filename), 'utf8'));
         const byName = new Map(products.map(product => [product.name, product]));
         assert.equal(new Set(products.map(product => product.id)).size, products.length, `${filename} no debe repetir identificadores`);
+        for (const product of products) {
+            assert.deepEqual(product.sizes, ['XS', 'S', 'M', 'L', 'XL'], `${product.name} debe ofrecer XS a XL`);
+            assert.equal(product.origin, 'Talleres aliados de Bogotá y Medellín', `${product.name} debe informar su origen`);
+        }
 
         for (const name of requiredNames) {
             const product = byName.get(name);
@@ -62,4 +67,12 @@ test('el catálogo y el seed incluyen las nuevas piezas con imágenes disponible
 
 test('la sección Impacto usa la imagen del taller local', () => {
     assert.match(aboutPage, /Gemini_Generated_Image_ic80esic80esic80\.jpg/);
+});
+
+test('las imágenes de portada del carrusel existen en sus carpetas asignadas', () => {
+    const slides = appSource.match(/const HERO_SLIDES = Object\.freeze\(\[([\s\S]*?)\]\);/);
+    assert.ok(slides, 'El carrusel debe declarar sus imágenes');
+    for (const [, image] of slides[1].matchAll(/image: '\.\/(assets\/images\/[^']+)'/g)) {
+        assert.ok(fs.existsSync(path.join(root, 'front', image)), `La imagen del carrusel debe existir: ${image}`);
+    }
 });
