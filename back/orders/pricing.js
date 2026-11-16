@@ -3,7 +3,14 @@
 const PROMO_CODES = Object.freeze({
     ANTHROS10: 10,
     BIENVENIDO: 15,
-    VERANO2026: 20
+    VERANO2026: 20,
+    ANTIVERSARIO: 25,
+    AMIGOANTHROS: 12,
+    COLOMBIA: 18,
+    BLACKFRIDAY: 30,
+    CYBERMONDAY: 28,
+    PRIMERACOMPRA: 10,
+    PROJECT: 17
 });
 
 function orderError(message, code, status) {

@@ -95,6 +95,7 @@ function writeData(name, data) {
     const file = DATA_FILES[name];
     const temporaryPath = `${file}.${process.pid}.${Date.now()}.tmp`;
     try {
+        // El reemplazo atómico evita dejar un JSON incompleto si el proceso se interrumpe.
         fs.writeFileSync(temporaryPath, `${JSON.stringify(data, null, 2)}\n`, { encoding: 'utf8', flag: 'wx' });
         fs.renameSync(temporaryPath, file);
     } catch (error) {
@@ -555,6 +556,7 @@ function createServer({
         mongoCollection: process.env.MONGODB_COLLECTION || 'products'
     });
 
+    // Express centraliza API, control de acceso y archivos estáticos en el mismo origen.
     const app = express();
     const onDatabaseFallback = error => switchToLocalPersistence(databaseStatus, error);
     const recordStore = recordStorage || createRecordStore({
@@ -562,6 +564,7 @@ function createServer({
         writeLocal: writeData,
         onDatabaseFallback
     });
+    // RecordStore usa MongoDB cuando está disponible y contactos.json como respaldo local.
     const contacts = contactStorage || {
         create: record => recordStore.create('contact_messages', 'contacts', record),
         list: () => recordStore.list('contact_messages', 'contacts')

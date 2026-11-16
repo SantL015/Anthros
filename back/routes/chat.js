@@ -14,6 +14,7 @@ const SYSTEM_INSTRUCTION = [
 ].join('\n\n');
 
 const FALLBACK_ANSWER = '¡Hola! Soy MágicoBot. Ahora mismo no puedo consultar la guía completa; revisa el catálogo o escríbenos por WhatsApp y te ayudaremos.';
+// Groq usa este modelo por defecto; GROQ_MODEL permite configurarlo en el despliegue.
 const DEFAULT_MODEL = 'qwen/qwen3.8-27b';
 const MAX_HISTORY_MESSAGES = 10;
 

@@ -2,11 +2,18 @@
         let appliedPromo = null;
         let appliedPromoCode = null;
         let menuOpen = false;
-        const API_BASE = '/api';
+        const API_BASE = '/api'; // API del mismo origen para desplegar sin depender de localhost.
         const PROMO_CODES = {
-            'ANTHROS10': 10,
-            'BIENVENIDO': 15,
-            'VERANO2026': 20
+            ANTHROS10: 10,
+            BIENVENIDO: 15,
+            VERANO2026: 20,
+            ANTIVERSARIO: 25,
+            AMIGOANTHROS: 12,
+            COLOMBIA: 18,
+            BLACKFRIDAY: 30,
+            CYBERMONDAY: 28,
+            PRIMERACOMPRA: 10,
+            PROJECT: 17
         };
 
         async function apiRequest(endpoint, options = {}) {
@@ -140,6 +147,11 @@
 
         async function finalizeCheckout(e) {
             e.preventDefault();
+            const checkoutError = document.getElementById('checkoutError');
+            if (checkoutError) {
+                checkoutError.hidden = true;
+                checkoutError.textContent = '';
+            }
             if (!cart.length) { showToast('Añade productos antes de pagar', 'error'); return; }
             const form = e.currentTarget;
             const data = new FormData(form);
@@ -197,8 +209,30 @@
                     : '';
                 form.innerHTML = `<div class="checkout-success"><span></span><p class="section-eyebrow">Pedido registrado · pendiente de pago</p><h2>Gracias por elegir Anthros.</h2><p>Tu pedido <strong>#${escapeHTML(order.id.slice(-8))}</strong> fue registrado. El total confirmado es <strong>${formatPrice(order.total)}</strong>.</p><p>El checkout no realiza cobros. Coordina el pago con el equipo de ANTHROS.</p>${whatsappAction}<a href="./index.html" class="checkout-submit">Volver al inicio</a></div>`;
             } catch (error) {
-                console.error('No se pudo confirmar el pedido:', error.message);
-                showToast('No se pudo confirmar el pedido. Tu carrito sigue intacto; inténtalo nuevamente.', 'error');
+                const isClientError = error instanceof AnthrosServices.ApiError &&
+                    error.status >= 400 && error.status < 500;
+                const isServerError = error instanceof AnthrosServices.ApiError &&
+                    error.status >= 500;
+                const reason = isClientError
+                    ? error.message
+                    : isServerError
+                        ? 'El servidor no pudo procesar el pedido.'
+                        : 'No fue posible conectar con el servidor para confirmar el pedido.';
+                const reference = isServerError && error.requestId
+                    ? ` Referencia: ${error.requestId}.`
+                    : '';
+                const message = `${reason}${reference} Tu carrito se conserva.`;
+                console.error('No se pudo confirmar el pedido:', {
+                    message: error.message,
+                    code: error.code,
+                    status: error.status,
+                    requestId: error.requestId
+                });
+                if (checkoutError) {
+                    checkoutError.textContent = message;
+                    checkoutError.hidden = false;
+                }
+                showToast(message, 'error');
                 if (submitButton) {
                     submitButton.disabled = false;
                     submitButton.textContent = 'Confirmar pedido';
@@ -370,15 +404,6 @@
             IVA_PORCENTAJE: 19,
             INCLUYE_IVA: true,
             BASE_GRAVABLE: 0.81
-        });
-
-        Object.assign(PROMO_CODES, {
-            'ANTIVERSARIO': 25,
-            'AMIGOANTHROS': 12,
-            'COLOMBIA': 18,
-            'BLACKFRIDAY': 30,
-            'CYBERMONDAY': 28,
-            'PRIMERACOMPRA': 10
         });
 
         const PRODUCT_CATEGORIES = Object.freeze({
@@ -639,6 +664,7 @@
 
         function saveCart() {
             if (!soportaStorage()) return;
+            // localStorage mantiene el mismo carrito al cambiar entre páginas HTML.
             const savedCart = AnthrosServices.storage.setJSON(STORAGE_KEYS.CART, normalizeCart(cart));
             if (!savedCart.ok) console.warn('saveCart falló', savedCart.error);
             if (Number.isFinite(appliedPromo) && appliedPromo > 0 && appliedPromoCode &&
@@ -831,7 +857,7 @@
         }
 
         function validatePhone(phone) {
-            return AnthrosServices.validation.phone(phone);
+            return /^\+?\d{7,15}$/.test(String(phone ?? '').trim().replace(/[\s()-]/g, ''));
         }
 
         function validateRequired(value, minLen = 2, maxLen = 200) {
@@ -1244,7 +1270,7 @@
         document.addEventListener('keydown', (e) => {
             if (e.key === 'Escape') {
                 const modal = document.getElementById('cartModal');
-                if (modal.classList.contains('open')) toggleCart();
+                if (modal && modal.classList.contains('open')) toggleCart();
                 closeQuickView();
                 closeSizeGuideModal();
                 if (menuOpen) closeMobileMenu();
@@ -1350,12 +1376,6 @@
             let target = pages[section] || 'index.html';
             if (anchorId && target.includes('#') === false) {
                 target = target + '#' + anchorId;
-            }
-            const currentPage = window.location.pathname.split('/').pop() || 'index.html';
-            const targetPage = target.split('#')[0];
-            if (targetPage === 'index.html' && (!currentPage || currentPage === 'index.html') && target.includes('#')) {
-                closeMobileMenu();
-                if (AnthrosServices.navigation.goToAnchor(decodeURIComponent(target.split('#')[1]))) return;
             }
             AnthrosServices.navigation.navigate(target, { beforeNavigate: closeMobileMenu });
         }
@@ -2513,7 +2533,7 @@
                 appliedPromo = null;
                 appliedPromoCode = null;
                 saveCart();
-                if (msg) { msg.textContent = 'Código inválido. Prueba: ANTHROS10, BIENVENIDO o VERANO2026'; msg.style.color = 'var(--red-primary)'; }
+                if (msg) { msg.textContent = 'Código inválido. Revísalo e inténtalo de nuevo.'; msg.style.color = 'var(--red-primary)'; }
                 if (typeof renderFullCartPage === 'function') renderFullCartPage();
                 return;
             }

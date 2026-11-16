@@ -458,7 +458,9 @@
             if (url.pathname === global.location.pathname && url.search === global.location.search && url.hash) {
                 const anchor = documentService.byId(decodeURIComponent(url.hash.slice(1)));
                 if (anchor) {
+                    if (url.hash !== global.location.hash) global.history.pushState(null, '', url.href);
                     documentService.scrollTo(anchor, options.scrollOptions);
+                    syncActiveNavigation();
                     return { navigated: false, scrolled: true };
                 }
             }
@@ -480,6 +482,179 @@
             return new URLSearchParams(global.location.search);
         }
     });
+
+    function initializeSiteHeader() {
+        const body = global.document.body;
+        if (!body || body.dataset.siteHeader === 'ready') return;
+
+        const previousNav = global.document.querySelector('body > nav');
+        global.document.getElementById('mobileMenu')?.remove();
+
+        const nav = global.document.createElement('nav');
+        nav.className = 'site-header';
+        nav.setAttribute('aria-label', 'Navegación principal');
+        nav.innerHTML = `
+            <div class="nav-inner">
+                <a class="nav-logo" href="./index.html">ANTHROS</a>
+                <ul class="nav-links" id="primaryNavigation">
+                    <li><a href="./index.html">Inicio</a></li>
+                    <li class="nav-item-submenu">
+                        <a href="./nosotros.html" aria-haspopup="true">Nosotros</a>
+                        <ul class="nav-submenu"><li><a href="./nosotros.html#impacto">Impacto local</a></li></ul>
+                    </li>
+                    <li><a href="./catalogo.html">Catálogo</a></li>
+                    <li><a href="./pedidos.html">Pedidos</a></li>
+                    <li><a href="./index.html#contacto">Contacto</a></li>
+                </ul>
+                <div class="nav-actions">
+                    <details class="nav-utility">
+                        <summary class="nav-utility-trigger" aria-label="Abrir herramientas de Anthros">
+                            Atelier <span aria-hidden="true">+</span><span class="nav-cart-badge" id="navCartCount">0</span>
+                        </summary>
+                        <div class="nav-utility-menu">
+                            <button class="theme-toggle" id="themeToggle" type="button" aria-label="Cambiar tema" aria-pressed="false">Tema</button>
+                            <a class="utility-link" href="./cuenta.html">Mi cuenta</a>
+                            <a class="utility-link" href="./favoritos.html"><span>Favoritos</span><span class="favorites-count" id="favoritesCount" style="display:none;">0</span></a>
+                            <a class="utility-link utility-cart" href="./carrito.html"><span>Carrito</span><span class="cart-count" id="cartCount">0</span></a>
+                        </div>
+                    </details>
+                    <button class="hamburger" id="hamburgerBtn" type="button" aria-label="Abrir menú" aria-controls="mobileMenu" aria-expanded="false">
+                        <span></span><span></span><span></span>
+                    </button>
+                </div>
+            </div>`;
+
+        const mobileMenu = global.document.createElement('div');
+        mobileMenu.className = 'mobile-menu';
+        mobileMenu.id = 'mobileMenu';
+        mobileMenu.setAttribute('aria-hidden', 'true');
+        mobileMenu.innerHTML = `
+            <div class="mobile-menu-panel" role="dialog" aria-modal="true" aria-label="Menú Anthros">
+                <div class="mobile-menu-title">MENÚ ANTHROS</div>
+                <ul class="mobile-nav-links">
+                    <li><a href="./index.html">Inicio</a></li>
+                    <li><a href="./nosotros.html">Nosotros</a>
+                        <ul class="mobile-nav-submenu"><li><a href="./nosotros.html#impacto">Impacto local</a></li></ul>
+                    </li>
+                    <li><a href="./catalogo.html">Catálogo</a></li>
+                    <li><a href="./pedidos.html">Pedidos</a></li>
+                    <li><a href="./index.html#contacto">Contacto</a></li>
+                </ul>
+                <div class="mobile-menu-divider"></div>
+                <div class="mobile-utility-links">
+                    <button class="mobile-utility-theme" id="mobileThemeToggle" type="button" aria-pressed="false">Cambiar tema</button>
+                    <a href="./cuenta.html">Mi cuenta</a>
+                    <a href="./favoritos.html">Mis favoritos <span class="favorites-count" id="mobileFavoritesCount" style="display:none;">0</span></a>
+                    <a href="./carrito.html">Carrito <span class="cart-count" id="mobileCartCount">0</span></a>
+                </div>
+                <a href="./catalogo.html" class="mobile-cta">Explorar productos</a>
+            </div>`;
+
+        if (previousNav) previousNav.replaceWith(nav);
+        else body.insertBefore(nav, body.firstChild);
+        nav.insertAdjacentElement('afterend', mobileMenu);
+        body.querySelector('.admin-topline > .admin-brand, .assistant-guide-shell > .admin-brand')?.remove();
+        body.dataset.siteHeader = 'ready';
+
+        const hamburger = nav.querySelector('#hamburgerBtn');
+        function setMobileMenuOpen(isOpen) {
+            mobileMenu.classList.toggle('open', isOpen);
+            mobileMenu.setAttribute('aria-hidden', String(!isOpen));
+            hamburger.setAttribute('aria-expanded', String(isOpen));
+            hamburger.setAttribute('aria-label', isOpen ? 'Cerrar menú' : 'Abrir menú');
+            body.style.overflow = isOpen ? 'hidden' : '';
+            if (isOpen) mobileMenu.querySelector('a')?.focus({ preventScroll: true });
+        }
+
+        hamburger.addEventListener('click', () => setMobileMenuOpen(!mobileMenu.classList.contains('open')));
+        mobileMenu.addEventListener('click', event => {
+            if (event.target === mobileMenu || event.target.closest('a')) setMobileMenuOpen(false);
+        });
+        global.document.addEventListener('keydown', event => {
+            if (event.key === 'Escape' && mobileMenu.classList.contains('open')) {
+                setMobileMenuOpen(false);
+                hamburger.focus({ preventScroll: true });
+            }
+        });
+
+        function updateThemeButtons() {
+            const isDark = global.document.documentElement.classList.contains('theme-dark');
+            nav.querySelector('#themeToggle').setAttribute('aria-pressed', String(isDark));
+            mobileMenu.querySelector('#mobileThemeToggle').setAttribute('aria-pressed', String(isDark));
+        }
+
+        function toggleSiteTheme() {
+            if (typeof global.toggleTheme === 'function') {
+                global.toggleTheme();
+                updateThemeButtons();
+                return;
+            }
+            const isDark = global.document.documentElement.classList.toggle('theme-dark');
+            const stored = storage.getJSON('anthros_user_prefs_v1');
+            const preferences = stored.ok && stored.value && typeof stored.value === 'object' && !Array.isArray(stored.value)
+                ? { ...stored.value }
+                : { theme: 'warm', currency: 'COP' };
+            preferences.theme = isDark ? 'dark' : 'warm';
+            const saved = storage.setJSON('anthros_user_prefs_v1', preferences);
+            if (!saved.ok) console.warn('No fue posible guardar el tema seleccionado.', saved.error);
+            updateThemeButtons();
+        }
+
+        nav.querySelector('#themeToggle').addEventListener('click', toggleSiteTheme);
+        mobileMenu.querySelector('#mobileThemeToggle').addEventListener('click', toggleSiteTheme);
+
+        const preferences = storage.getJSON('anthros_user_prefs_v1');
+        if (preferences.ok && preferences.value?.theme === 'dark') {
+            global.document.documentElement.classList.add('theme-dark');
+        }
+        updateThemeButtons();
+        updateSiteHeaderCounts();
+    }
+
+    function updateSiteHeaderCounts() {
+        const cart = storage.getJSON('anthros_cart_v1');
+        const favorites = storage.getJSON('anthros_favorites_v1');
+        if (!cart.ok) console.warn('No fue posible leer el carrito para el encabezado.', cart.error);
+        if (!favorites.ok) console.warn('No fue posible leer favoritos para el encabezado.', favorites.error);
+        const cartCount = cart.ok && Array.isArray(cart.value)
+            ? cart.value.reduce((total, item) => total + Math.max(0, Math.floor(Number(item?.qty) || 0)), 0)
+            : 0;
+        const favoriteCount = favorites.ok && Array.isArray(favorites.value) ? favorites.value.length : 0;
+        global.document.querySelectorAll('#navCartCount, #cartCount, #mobileCartCount')
+            .forEach(element => { element.textContent = String(cartCount); });
+        global.document.querySelectorAll('#favoritesCount, #mobileFavoritesCount')
+            .forEach(element => {
+                element.textContent = String(favoriteCount);
+                element.style.display = favoriteCount ? 'inline-flex' : 'none';
+            });
+    }
+
+    function syncActiveNavigation() {
+        const currentUrl = new URL(global.location.href);
+        const currentPath = currentUrl.pathname.endsWith('/')
+            ? `${currentUrl.pathname}index.html`
+            : currentUrl.pathname;
+        const links = Array.from(global.document.querySelectorAll(
+            'nav .nav-links a, .mobile-menu .mobile-nav-links a'
+        ));
+        const currentPageLinks = links.map(link => ({
+            link,
+            destination: new URL(link.href, currentUrl.href)
+        })).filter(({ destination }) =>
+            destination.origin === currentUrl.origin && destination.pathname === currentPath
+        );
+        const hashLinks = currentPageLinks.filter(({ destination }) =>
+            currentUrl.hash && destination.hash === currentUrl.hash
+        );
+        const activeHash = hashLinks.length ? currentUrl.hash : '';
+
+        currentPageLinks.forEach(({ link, destination }) => {
+            const isActive = destination.hash === activeHash;
+            link.classList.toggle('active', isActive);
+            if (isActive) link.setAttribute('aria-current', 'page');
+            else link.removeAttribute('aria-current');
+        });
+    }
 
     const process = Object.freeze({
         sleep(milliseconds, signal) {
@@ -576,25 +751,13 @@
         validation
     });
 
-    const currentHash = global.location.hash;
+    initializeSiteHeader();
     global.document.querySelectorAll('nav').forEach(nav => {
         if (!nav.hasAttribute('aria-label')) nav.setAttribute('aria-label', 'Navegación principal');
     });
-    global.document.querySelectorAll('nav .nav-links a').forEach(link => {
-        const destination = new URL(link.href, global.location.href);
-        const currentPath = global.location.pathname.endsWith('/')
-            ? `${global.location.pathname}index.html`
-            : global.location.pathname;
-        const isCurrentPage = destination.pathname === currentPath
-            && (!destination.hash || destination.hash === currentHash);
-        if (isCurrentPage) {
-            link.classList.add('active');
-            link.setAttribute('aria-current', 'page');
-        } else {
-            link.classList.remove('active');
-            link.removeAttribute('aria-current');
-        }
-    });
+    syncActiveNavigation();
+    global.addEventListener('hashchange', syncActiveNavigation);
+    global.addEventListener('popstate', syncActiveNavigation);
 
     global.document.querySelectorAll('nav .nav-links').forEach((links, index) => {
         if (!links.id) links.id = index === 0 ? 'primaryNavigation' : `primaryNavigation-${index + 1}`;
@@ -602,7 +765,7 @@
     global.document.querySelectorAll('nav .hamburger').forEach(button => {
         const links = button.closest('nav')?.querySelector('.nav-links');
         if (links) {
-            button.setAttribute('aria-controls', links.id);
+            button.setAttribute('aria-controls', global.document.getElementById('mobileMenu') ? 'mobileMenu' : links.id);
             button.setAttribute('aria-expanded', 'false');
         }
     });

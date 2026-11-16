@@ -491,6 +491,30 @@ test('orders API registra pedidos y los consulta con el contrato del checkout', 
     assert.equal(listed.payload.orders[0].customer.email, 'ana@example.com');
 });
 
+test('orders API aplica el código PROJECT al total confirmado por el servidor', async () => {
+    const created = await request('/api/orders', {
+        method: 'POST',
+        body: {
+            customer: {
+                name: 'Ana Prueba',
+                email: 'ana@example.com',
+                phone: '3001234567',
+                city: 'Barranquilla',
+                address: 'Calle 1 #2-3'
+            },
+            payment: 'card',
+            acceptedTerms: true,
+            promoCode: 'PROJECT',
+            items: [{ id: 1, size: 'M', qty: 1 }]
+        }
+    });
+
+    assert.equal(created.response.status, 201);
+    assert.equal(created.payload.order.promoCode, 'PROJECT');
+    assert.equal(created.payload.order.appliedPromo, 17);
+    assert.equal(created.payload.order.total, 58054);
+});
+
 test('orders API requiere aceptar términos y rechaza tallas o pagos no permitidos', async () => {
     const body = {
         customer: {
