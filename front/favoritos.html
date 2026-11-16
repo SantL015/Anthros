@@ -9,7 +9,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800;900&family=Inter:wght@300;400;500;600;700;800&family=Cormorant+Garamond:wght@500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="./assets/css/styles.css?v=anthros-catalog-2">
+    <link rel="stylesheet" href="./assets/css/styles.css?v=anthros-ui-4">
 </head>
 <body>
     <div class="scroll-progress" id="scrollProgress"></div>
@@ -20,7 +20,8 @@
             <ul class="nav-links">
                 <li><a href="./index.html" class="animate-fade-up delay-1" onclick="event.preventDefault();navigateTo('home');">Inicio</a></li>
                 <li><a href="./nosotros.html" class="animate-fade-up delay-2" onclick="event.preventDefault();navigateTo('nosotros');">Nosotros</a></li>
-                <li><a href="./catalogo.html" class="animate-fade-up delay-3" onclick="event.preventDefault();navigateTo('catalogo');">Colección</a></li>
+                <li><a href="./nosotros.html#impacto" class="animate-fade-up delay-2" onclick="event.preventDefault();navigateTo('nosotros','impacto');">Impacto</a></li>
+                <li><a href="./catalogo.html" class="animate-fade-up delay-3" onclick="event.preventDefault();navigateTo('catalogo');">Catálogo</a></li>
                 <li><a href="./pedidos.html" class="animate-fade-up delay-4" onclick="event.preventDefault();navigateTo('orders');">Pedidos</a></li>
                 <li><a href="./index.html#contacto" class="animate-fade-up delay-4" onclick="event.preventDefault();navigateTo('home','contacto');">Contacto</a></li>
             </ul>
@@ -37,7 +38,8 @@
             <ul class="mobile-nav-links">
                 <li><a href="./index.html" onclick="event.preventDefault();closeMobileMenu();navigateTo('home');"> Inicio</a></li>
                 <li><a href="./nosotros.html" onclick="event.preventDefault();closeMobileMenu();navigateTo('nosotros');"> Nosotros</a></li>
-                <li><a href="./catalogo.html" onclick="event.preventDefault();closeMobileMenu();navigateTo('catalogo');"> Colección</a></li>
+                <li><a href="./nosotros.html#impacto" onclick="event.preventDefault();closeMobileMenu();navigateTo('nosotros','impacto');"> Impacto local</a></li>
+                <li><a href="./catalogo.html" onclick="event.preventDefault();closeMobileMenu();navigateTo('catalogo');"> Catálogo</a></li>
                 <li><a href="./favoritos.html" onclick="event.preventDefault();closeMobileMenu();navigateTo('favorites');"> Mis Favoritos</a></li>
                 <li><a href="./pedidos.html" onclick="event.preventDefault();closeMobileMenu();navigateTo('orders');"> Mis Pedidos</a></li>
                 <li><a href="./index.html#contacto" onclick="event.preventDefault();closeMobileMenu();navigateTo('home','contacto');"> Contacto</a></li>
@@ -80,9 +82,10 @@
         <div class="footer-inner">
             <div class="footer-brand">ANTHROS</div>
             <p class="footer-tagline">"Viste tu autenticidad. Vive tu esencia."</p>
+            <address class="footer-contact"><a href="mailto:hola@anthros.com">hola@anthros.com</a><a href="tel:+573001234567">+57 300 123 4567</a><a href="https://wa.me/573001234567" target="_blank" rel="noopener noreferrer">WhatsApp</a></address>
             <div class="footer-grid">
-                <div class="footer-col"><h4>Sobre Nosotros</h4><p>Marca colombiana de moda premium. Diseño atemporal, calidad excepcional y producción consciente.</p></div>
-                <div class="footer-col"><h4>Colección</h4><ul>
+                <div class="footer-col"><h4>Sobre Nosotros</h4><p>Marca colombiana de moda premium. Diseño atemporal, calidad excepcional y producción consciente.</p><p><a href="./nosotros.html#impacto">Impacto local</a></p></div>
+                <div class="footer-col"><h4>Catálogo</h4><ul>
                     <li><a href="./catalogo.html" onclick="event.preventDefault();navigateTo('catalogo');">Ver Catálogo</a></li>
                     <li><a href="./catalogo.html" onclick="event.preventDefault();navigateTo('catalogo');">Hombres</a></li>
                     <li><a href="./catalogo.html" onclick="event.preventDefault();navigateTo('catalogo');">Mujeres</a></li>
@@ -97,10 +100,10 @@
                 <div class="footer-col"><h4>Legal</h4><ul><li><a href="./terminos.html">Términos</a></li><li><a href="./privacidad.html">Privacidad</a></li><li><a href="./garantias.html">Cambios</a></li><li><a href="./garantias.html">Garantía</a></li></ul></div>
             </div>
             <div class="footer-social">
-                <a href="#" class="social-icon" title="Instagram"></a>
-                <a href="#" class="social-icon" title="Facebook"></a>
-                <a href="#" class="social-icon" title="TikTok"></a>
-                <a href="#" class="social-icon" title="WhatsApp"></a>
+                <a href="https://www.instagram.com/" class="social-icon" title="Instagram" aria-label="Instagram" target="_blank" rel="noopener noreferrer"></a>
+                <a href="https://www.facebook.com/" class="social-icon" title="Facebook" aria-label="Facebook" target="_blank" rel="noopener noreferrer"></a>
+                <a href="https://www.tiktok.com/" class="social-icon" title="TikTok" aria-label="TikTok" target="_blank" rel="noopener noreferrer"></a>
+                <a href="https://wa.me/573001234567" class="social-icon" title="WhatsApp" aria-label="WhatsApp" target="_blank" rel="noopener noreferrer"></a>
             </div>
             <div class="footer-bottom"><p> 2024 ANTHROS  Todos los derechos reservados</p><p>Hecho con  pasión por la moda colombiana · Barranquilla</p></div>
         </div>
@@ -127,6 +130,6 @@
     <script src="./assets/js/services/index.js?v=anthros-catalog-2"></script>
     <script src="./assets/js/calculos.js"></script>
     <script src="./assets/js/assistant-knowledge.js?v=1"></script>
-    <script src="./assets/js/app.js?v=anthros-catalog-3"></script>
+    <script src="./assets/js/app.js?v=anthros-cart-5"></script>
 </body>
 </html>

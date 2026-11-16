@@ -14,7 +14,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800;900&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="./assets/css/styles.css?v=anthros-catalog-2">
+    <link rel="stylesheet" href="./assets/css/styles.css?v=anthros-ui-4">
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -28,7 +28,7 @@
     }
     </script>
 </head>
-<body>
+<body class="about-page">
     <div class="scroll-progress" id="scrollProgress"></div>
     <nav aria-label="Navegación principal">
         <div class="nav-inner">
@@ -36,7 +36,8 @@
             <ul class="nav-links">
                 <li><a href="./index.html" onclick="event.preventDefault();navigateTo('home');">Inicio</a></li>
                 <li><a href="./nosotros.html" class="active" aria-current="page">Nosotros</a></li>
-                <li><a href="./catalogo.html" onclick="event.preventDefault();navigateTo('catalogo');">Colección</a></li>
+                <li><a href="#impacto">Impacto</a></li>
+                <li><a href="./catalogo.html" onclick="event.preventDefault();navigateTo('catalogo');">Catálogo</a></li>
                 <li><a href="./pedidos.html" onclick="event.preventDefault();navigateTo('orders');">Pedidos</a></li>
                 <li><a href="./cuenta.html">Mi cuenta</a></li>
                 <li><a href="#contacto">Contacto</a></li>
@@ -62,9 +63,10 @@
             <div class="section-header"><span class="section-eyebrow">Explora Anthros</span><h2 id="about-nav-title" class="section-title">Una historia con varias puertas</h2></div>
             <div class="about-nav-grid">
                 <a class="about-nav-card" href="#mision-vision"><span>01</span><h3>Misión y visión</h3><p>El norte detrás de cada colección.</p><strong>Leer más </strong></a>
-                <a class="about-nav-card" href="#blog"><span>02</span><h3>Blog de Anthros</h3><p>Ideas sobre ropa, cuidado y consumo consciente.</p><strong>Visitar blog </strong></a>
-                <a class="about-nav-card" href="#redes"><span>03</span><h3>Redes sociales</h3><p>El pulso diario de nuestra comunidad.</p><strong>Seguirnos </strong></a>
-                <a class="about-nav-card" href="#contacto"><span>04</span><h3>Contacta a Anthros</h3><p>Estamos aquí para acompañarte.</p><strong>Escribirnos </strong></a>
+                <a class="about-nav-card" href="#impacto"><span>02</span><h3>Impacto local</h3><p>El oficio y las personas detrás de cada prenda.</p><strong>Conocer el impacto </strong></a>
+                <a class="about-nav-card" href="#blog"><span>03</span><h3>Blog de Anthros</h3><p>Ideas sobre ropa, cuidado y consumo consciente.</p><strong>Visitar blog </strong></a>
+                <a class="about-nav-card" href="#redes"><span>04</span><h3>Redes sociales</h3><p>El pulso diario de nuestra comunidad.</p><strong>Seguirnos </strong></a>
+                <a class="about-nav-card" href="#contacto"><span>05</span><h3>Contacta a Anthros</h3><p>Estamos aquí para acompañarte.</p><strong>Escribirnos </strong></a>
             </div>
         </section>
 
@@ -90,8 +92,26 @@
             </div>
         </section>
 
+        <section class="impact-section reveal" id="impacto" aria-labelledby="impactTitle">
+            <div class="impact-heading">
+                <span class="section-eyebrow">03 / Impacto local</span>
+                <h2 id="impactTitle">Una moda con raíces y <em>rostros.</em></h2>
+                <p>El valor de una prenda también está en las manos que la hacen posible. Por eso ponemos el oficio local, la transparencia y el trato digno en el centro de nuestra manera de producir.</p>
+                <figure class="impact-workshop-photo">
+                    <img src="./assets/images/Gemini_Generated_Image_ic80esic80esic80.jpg" alt="Escena de confección textil en un taller, con una costurera trabajando junto a su equipo" loading="lazy" decoding="async">
+                    <figcaption>El oficio textil, en el centro de cada pieza.</figcaption>
+                </figure>
+                <a href="#contacto">Conversemos sobre nuestro trabajo <span aria-hidden="true">↗</span></a>
+            </div>
+            <div class="impact-pillars">
+                <article><span>01 / BOGOTÁ</span><h3>Talleres locales</h3><p>Trabajamos junto a talleres aliados en Bogotá y Medellín para fortalecer el talento y el saber hacer de la confección colombiana.</p></article>
+                <article><span>02 / OFICIO</span><h3>Hecho con cuidado</h3><p>Valoramos procesos atentos al detalle, comunicación directa y prendas pensadas para acompañar más de una temporada.</p></article>
+                <article><span>03 / EQUIDAD</span><h3>Comercio justo</h3><p>Promovemos relaciones de trabajo respetuosas y condiciones dignas como parte esencial de una moda más consciente.</p></article>
+            </div>
+        </section>
+
         <section class="about-journal section reveal" id="blog" aria-labelledby="blog-title">
-            <div class="section-header"><span class="section-eyebrow">03 / Ideas</span><h2 id="blog-title" class="section-title">Blog de Anthros</h2><p class="section-subtitle">Notas para vestir mejor, cuidar más y comprar con intención.</p></div>
+            <div class="section-header"><span class="section-eyebrow">04 / Ideas</span><h2 id="blog-title" class="section-title">Blog de Anthros</h2><p class="section-subtitle">Notas para vestir mejor, cuidar más y comprar con intención.</p></div>
             <div class="journal-grid">
                 <article><span>Materiales</span><h3>Cómo reconocer una prenda hecha para durar</h3><p>Una guía breve para mirar fibras, costuras y acabados antes de elegir.</p><a href="#contacto">Leer próximamente </a></article>
                 <article><span>Cuidado</span><h3>El ritual de cuidar tu ropa</h3><p>Lavar menos, reparar a tiempo y conservar mejor: pequeños gestos con gran impacto.</p><a href="#contacto">Leer próximamente </a></article>
@@ -100,19 +120,19 @@
         </section>
 
         <section class="socials-section section reveal" id="redes" aria-labelledby="social-title">
-            <div><span class="section-eyebrow">04 / Comunidad</span><h2 id="social-title">Anthros se mueve contigo.</h2><p>Descubre nuevas prendas, procesos y conversaciones en nuestros canales.</p></div>
+            <div><span class="section-eyebrow">05 / Comunidad</span><h2 id="social-title">Anthros se mueve contigo.</h2><p>Descubre nuevas prendas, procesos y conversaciones en nuestros canales.</p></div>
             <div class="social-links-large"><a href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer">Instagram <span></span></a><a href="https://www.facebook.com/" target="_blank" rel="noopener noreferrer">Facebook <span></span></a><a href="https://www.tiktok.com/" target="_blank" rel="noopener noreferrer">TikTok <span></span></a></div>
         </section>
 
         <section class="contact-about section reveal" id="contacto" aria-labelledby="contact-about-title">
-            <div><span class="section-eyebrow">05 / Hablemos</span><h2 id="contact-about-title">Contacta a Anthros</h2><p>¿Tienes una pregunta, una colaboración o una historia que compartir?</p></div>
+            <div><span class="section-eyebrow">06 / Hablemos</span><h2 id="contact-about-title">Contacta a Anthros</h2><p>¿Tienes una pregunta, una colaboración o una historia que compartir?</p></div>
             <address><a href="mailto:hola@anthros.com">hola@anthros.com</a><a href="tel:+573001234567">+57 300 123 4567</a><span>Barranquilla, Colombia</span></address>
         </section>
     </main>
 
-    <footer><div class="footer-inner"><div class="footer-brand">ANTHROS</div><p class="footer-tagline">Viste tu autenticidad. Vive tu esencia.</p><div class="footer-bottom"><p> 2026 ANTHROS  Todos los derechos reservados</p><p>Moda colombiana consciente y funcional</p></div></div></footer>
+    <footer><div class="footer-inner"><div class="footer-brand">ANTHROS</div><p class="footer-tagline">Viste tu autenticidad. Vive tu esencia.</p><address class="footer-contact"><a href="mailto:hola@anthros.com">hola@anthros.com</a><a href="tel:+573001234567">+57 300 123 4567</a><a href="https://wa.me/573001234567" target="_blank" rel="noopener noreferrer">WhatsApp</a></address><div class="footer-social"><a class="social-icon" href="https://www.instagram.com/" title="Instagram" aria-label="Instagram" target="_blank" rel="noopener noreferrer"></a><a class="social-icon" href="https://www.facebook.com/" title="Facebook" aria-label="Facebook" target="_blank" rel="noopener noreferrer"></a><a class="social-icon" href="https://www.tiktok.com/" title="TikTok" aria-label="TikTok" target="_blank" rel="noopener noreferrer"></a></div><div class="footer-bottom"><p> 2026 ANTHROS · Todos los derechos reservados</p><a href="./privacidad.html">Privacidad</a><a href="./terminos.html">Términos</a><a href="./garantias.html">Garantías</a><p>Moda colombiana consciente y funcional</p></div></div></footer>
     <button class="scroll-top" id="scrollTop" onclick="scrollToTop()" aria-label="Volver arriba"></button>
     <div class="toast" id="toast" role="status" aria-live="polite"></div>
-    <script src="./assets/js/services/index.js?v=anthros-catalog-2"></script><script src="./assets/js/calculos.js"></script><script src="./assets/js/assistant-knowledge.js?v=1"></script><script src="./assets/js/app.js?v=anthros-catalog-3"></script>
+    <script src="./assets/js/services/index.js?v=anthros-catalog-2"></script><script src="./assets/js/calculos.js"></script><script src="./assets/js/assistant-knowledge.js?v=1"></script><script src="./assets/js/app.js?v=anthros-cart-5"></script>
 </body>
 </html>

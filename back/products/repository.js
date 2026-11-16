@@ -151,7 +151,7 @@ function createProductRepository({ filePath, seedPath, mongoUri = '', mongoDatab
                         : { $regex: escapeRegExp(filterText), $options: 'i' };
                 }
             } else if (filterText) {
-                filter.$or = ['name', 'category', 'gender', 'line', 'collection', 'material', 'desc']
+                filter.$or = ['name', 'category', 'gender', 'line', 'collection', 'material', 'origin', 'desc']
                     .map(key => ({ [key]: { $regex: escapeRegExp(filterText), $options: 'i' } }));
             }
             const safeLimit = Math.max(1, Math.min(100, Number(limit) || 100));
@@ -186,7 +186,7 @@ function createProductRepository({ filePath, seedPath, mongoUri = '', mongoDatab
                     }
                     return String(actual ?? '').toLocaleLowerCase('es').includes(filterText.toLocaleLowerCase('es'));
                 }
-                return ['name', 'category', 'gender', 'line', 'collection', 'material', 'desc']
+                return ['name', 'category', 'gender', 'line', 'collection', 'material', 'origin', 'desc']
                     .some(key => String(product[key] ?? '').toLocaleLowerCase('es').includes(filterText.toLocaleLowerCase('es')));
             })
             : allProducts;

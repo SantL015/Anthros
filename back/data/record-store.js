@@ -53,7 +53,44 @@ function createRecordStore({
         return true;
     }
 
-    return Object.freeze({ addUnique });
+    async function create(collectionName, localName, record) {
+        if (connection.readyState === 1) {
+            try {
+                await connection.db.collection(collectionName).insertOne(record);
+                return record;
+            } catch (error) {
+                if (!isTransientDatabaseError(error)) throw error;
+                await onDatabaseFallback(error);
+            }
+        } else {
+            await onDatabaseFallback({ name: 'MongoNotConnectedError', code: 'DATABASE_DISCONNECTED' });
+        }
+
+        const records = readLocal(localName);
+        writeLocal(localName, [record, ...records]);
+        return record;
+    }
+
+    async function list(collectionName, localName) {
+        if (connection.readyState === 1) {
+            try {
+                return await connection.db.collection(collectionName)
+                    .find({})
+                    .sort({ createdAt: -1 })
+                    .toArray();
+            } catch (error) {
+                if (!isTransientDatabaseError(error)) throw error;
+                await onDatabaseFallback(error);
+            }
+        } else {
+            await onDatabaseFallback({ name: 'MongoNotConnectedError', code: 'DATABASE_DISCONNECTED' });
+        }
+        return readLocal(localName).sort((left, right) =>
+            String(right.createdAt || '').localeCompare(String(left.createdAt || ''))
+        );
+    }
+
+    return Object.freeze({ addUnique, create, list });
 }
 
 module.exports = { createRecordStore };

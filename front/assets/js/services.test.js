@@ -5,13 +5,14 @@ const fs = require('node:fs');
 const vm = require('node:vm');
 const { test } = require('node:test');
 
-function createServices() {
+function createServices(windowOptions = {}) {
     const window = {
         document: { querySelectorAll: () => [] },
-        location: { hash: '', pathname: '/' }
+        location: { hash: '', pathname: '/' },
+        ...windowOptions
     };
     const source = fs.readFileSync(__dirname + '/services/index.js', 'utf8');
-    vm.runInNewContext(source, { window, URL, URLSearchParams });
+    vm.runInNewContext(source, { window, URL, URLSearchParams, AbortController });
     return window.AnthrosServices;
 }
 
@@ -44,4 +45,20 @@ test('integrations crea un enlace WhatsApp codificado con el resumen del carrito
     assert.match(url.searchParams.get('text'), /250\.000 COP/);
     assert.match(url.searchParams.get('text'), /Bogotá/);
     assert.match(url.searchParams.get('text'), /Calle 1 #2-3/);
+});
+
+test('API usa la URL externa configurable del backend', async () => {
+    let requestedUrl;
+    const services = createServices({
+        ANTHROS_API_URL: 'https://api.anthros.example/',
+        fetch: async url => {
+            requestedUrl = url;
+            return { ok: true, status: 200, text: async () => '{"ok":true}' };
+        },
+        setTimeout,
+        clearTimeout
+    });
+
+    await services.api.health();
+    assert.equal(requestedUrl, 'https://api.anthros.example/api/health');
 });

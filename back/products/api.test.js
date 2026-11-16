@@ -21,6 +21,7 @@ let server;
 let baseUrl;
 const savedOrders = [];
 const savedRecords = new Map();
+const savedContacts = [];
 let stallChat = false;
 let failChat = false;
 let chatAnswer = 'Te recomiendo revisar el catálogo.';
@@ -42,6 +43,13 @@ before(async () => {
                 savedRecords.set(collectionName, [...records, record]);
                 return true;
             }
+        },
+        contactStorage: {
+            create: async contact => {
+                savedContacts.unshift(contact);
+                return contact;
+            },
+            list: async () => savedContacts
         },
         chatClientFactory: apiKey => {
             assert.equal(apiKey, 'groq-test-key');
@@ -138,6 +146,7 @@ test('products API covers public search and authenticated CRUD with useful error
         collection: 'Esenciales',
         year: 2026,
         material: 'Algodón orgánico',
+        origin: 'Talleres aliados de Bogotá y Medellín',
         colors: ['Marfil'],
         shipping: '3-5 días hábiles',
         care: 'Lavar en frío',
@@ -157,6 +166,7 @@ test('products API covers public search and authenticated CRUD with useful error
     assert.equal(created.response.status, 201);
     assert.ok(Number.isInteger(created.payload.product.id));
     assert.equal(created.payload.product.cut, productInput.cut);
+    assert.equal(created.payload.product.origin, productInput.origin);
     assert.deepEqual(created.payload.product.sustainability, productInput.sustainability);
     const id = created.payload.product.id;
 
@@ -210,6 +220,75 @@ test('products API covers public search and authenticated CRUD with useful error
     const missing = await request(`/api/products/${id}`);
     assert.equal(missing.response.status, 404);
     assert.equal(missing.payload.error.code, 'PRODUCT_NOT_FOUND');
+});
+
+test('contact API validates and persists messages; administration routes require a token', async () => {
+    const invalid = await request('/api/contact', {
+        method: 'POST',
+        body: { name: 'A', email: 'correo-invalido', subject: '', message: 'corto' }
+    });
+    assert.equal(invalid.response.status, 400);
+    assert.equal(invalid.payload.error.code, 'INVALID_CONTACT');
+
+    const oversized = await request('/api/contact', {
+        method: 'POST',
+        body: {
+            name: 'Ana Pérez',
+            email: 'ana@example.com',
+            subject: 'Consulta válida',
+            message: 'x'.repeat(2001)
+        }
+    });
+    assert.equal(oversized.response.status, 400);
+    assert.ok(oversized.payload.error.details.message);
+
+    const unauthenticated = await request('/api/contact');
+    assert.equal(unauthenticated.response.status, 401);
+    const invalidLogin = await request('/api/admin/session', {
+        token: 'token-incorrecto'
+    });
+    assert.equal(invalidLogin.response.status, 401);
+
+    const login = await request('/api/admin/session', {
+        token: process.env.ADMIN_API_TOKEN
+    });
+    assert.equal(login.response.status, 200);
+    assert.equal(login.payload.ok, true);
+    const alternateHeaderLogin = await fetch(`${baseUrl}/api/admin/session`, {
+        headers: { 'x-admin-token': process.env.ADMIN_API_TOKEN }
+    });
+    assert.equal(alternateHeaderLogin.status, 200);
+
+    const created = await request('/api/contact', {
+        method: 'POST',
+        body: {
+            name: 'Ana Pérez',
+            email: 'ANA@example.com',
+            subject: 'Consulta de tallas',
+            message: '¿Me pueden ayudar a elegir la talla correcta?'
+        }
+    });
+    assert.equal(created.response.status, 201);
+    assert.ok(created.payload.contact.id);
+    assert.equal(savedContacts[0].email, 'ana@example.com');
+
+    const listed = await request('/api/contact', {
+        token: process.env.ADMIN_API_TOKEN
+    });
+    assert.equal(listed.response.status, 200);
+    assert.equal(listed.payload.contacts.length, 1);
+    assert.equal(listed.payload.contacts[0].subject, 'Consulta de tallas');
+
+    const preflight = await fetch(`${baseUrl}/api/contact`, {
+        method: 'OPTIONS',
+        headers: {
+            Origin: 'https://anthros-preview.netlify.app',
+            'Access-Control-Request-Method': 'GET',
+            'Access-Control-Request-Headers': 'authorization'
+        }
+    });
+    assert.equal(preflight.status, 204);
+    assert.equal(preflight.headers.get('access-control-allow-origin'), 'https://anthros-preview.netlify.app');
 });
 
 test('chat API valida el mensaje y usa la guía local cuando Groq no está configurado', async () => {

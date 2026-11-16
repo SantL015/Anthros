@@ -3,12 +3,17 @@
 
     const api = window.AnthrosServices.api;
     const list = document.getElementById('productList');
-    const editor = document.getElementById('productJson');
-    const tokenInput = document.getElementById('adminToken');
+    const form = document.getElementById('productForm');
+    const loginForm = document.getElementById('loginForm');
+    const loginInput = document.getElementById('adminToken');
+    const workspace = document.getElementById('adminWorkspace');
     const saveButton = document.getElementById('saveButton');
     const deleteButton = document.getElementById('deleteButton');
     const editorStatus = document.getElementById('editorStatus');
     const listStatus = document.getElementById('listStatus');
+    const messagesStatus = document.getElementById('messagesStatus');
+    const messageList = document.getElementById('messageList');
+    let token = '';
     let selectedId = null;
 
     function showStatus(element, message, kind = '') {
@@ -22,15 +27,29 @@
         return `${error.message}${help}${requestId}`;
     }
 
-    function authToken() {
-        const token = tokenInput.value.trim();
-        if (!token) throw new Error('Ingresa el token administrativo para guardar o borrar productos.');
-        return token;
+    function field(name) {
+        return form.elements.namedItem(name);
+    }
+
+    function productFields() {
+        return {
+            name: field('name').value.trim(),
+            collection: field('collection').value.trim(),
+            price: Number(field('price').value),
+            sizes: field('sizes').value.split(',').map(size => size.trim()).filter(Boolean),
+            img: field('img').value.trim(),
+            desc: field('desc').value.trim()
+        };
     }
 
     function selectProduct(product) {
         selectedId = Number(product.id);
-        editor.value = JSON.stringify(product, null, 2);
+        field('name').value = product.name || '';
+        field('collection').value = product.collection || '';
+        field('price').value = product.price ?? '';
+        field('sizes').value = Array.isArray(product.sizes) ? product.sizes.join(', ') : '';
+        field('img').value = product.img || '';
+        field('desc').value = product.desc || '';
         saveButton.textContent = 'Guardar cambios';
         deleteButton.disabled = false;
         showStatus(editorStatus, `Editando ${product.name} · ID ${selectedId}`);
@@ -79,29 +98,82 @@
         }
     }
 
-    function parseEditor() {
-        let product;
+    async function loadMessages() {
+        showStatus(messagesStatus, 'Cargando mensajes…');
         try {
-            product = JSON.parse(editor.value);
-        } catch {
-            throw new Error('La ficha no contiene JSON válido.');
+            const result = await api.contacts(token);
+            messageList.replaceChildren();
+            if (!result.contacts.length) {
+                showStatus(messagesStatus, 'Aún no hay mensajes de contacto.');
+                return;
+            }
+            showStatus(messagesStatus, `${result.contacts.length} mensaje(s) recibidos.`, 'success');
+            result.contacts.forEach(contact => {
+                const article = document.createElement('article');
+                article.className = 'admin-message';
+                const title = document.createElement('h3');
+                title.textContent = contact.subject;
+                const meta = document.createElement('small');
+                meta.textContent = `${contact.name} · ${contact.email} · ${new Date(contact.createdAt).toLocaleString('es-CO')}`;
+                const message = document.createElement('p');
+                message.textContent = contact.message;
+                article.append(title, meta, message);
+                messageList.append(article);
+            });
+        } catch (error) {
+            showStatus(messagesStatus, errorMessage(error), 'error');
         }
-        if (!product || typeof product !== 'object' || Array.isArray(product)) {
-            throw new Error('La ficha debe ser un objeto JSON de producto.');
-        }
-        delete product.id;
-        return product;
     }
 
-    async function saveProduct() {
+    async function login(event) {
+        event.preventDefault();
+        const loginButton = document.getElementById('loginButton');
+        const candidate = loginInput.value.trim();
+        if (!candidate) return;
+        loginButton.disabled = true;
+        loginButton.textContent = 'Verificando…';
+        showStatus(document.getElementById('loginStatus'), 'Validando acceso…');
+        try {
+            await api.verifyAdmin(candidate);
+            token = candidate;
+            loginInput.value = '';
+            document.getElementById('adminLogin').hidden = true;
+            workspace.hidden = false;
+            await Promise.all([loadProducts(), loadMessages()]);
+        } catch (error) {
+            showStatus(document.getElementById('loginStatus'), errorMessage(error), 'error');
+        } finally {
+            loginButton.disabled = false;
+            loginButton.textContent = 'Iniciar sesión';
+        }
+    }
+
+    async function saveProduct(event) {
+        event.preventDefault();
+        if (!form.reportValidity()) return;
         saveButton.disabled = true;
         try {
-            const token = authToken();
-            const product = parseEditor();
+            const fields = productFields();
             const creating = selectedId === null;
             const result = creating
-                ? await api.createProduct(product, token)
-                : await api.updateProduct(selectedId, product, token);
+                ? await api.createProduct({
+                    ...fields,
+                    category: 'unisex',
+                    gender: 'Unisex',
+                    line: 'Atelier',
+                    originalPrice: null,
+                    discount: 0,
+                    isNew: false,
+                    badge: '',
+                    year: new Date().getFullYear(),
+                    material: 'Material sostenible',
+                    colors: ['Natural'],
+                    shipping: '3-5 días hábiles',
+                    care: 'Seguir las instrucciones de la etiqueta',
+                    rating: 0,
+                    reviews: 0
+                }, token)
+                : await api.patchProduct(selectedId, fields, token);
             selectProduct(result.product);
             showStatus(editorStatus, `Producto ${creating ? 'creado' : 'actualizado'} correctamente.`, 'success');
             await loadProducts();
@@ -116,8 +188,8 @@
         if (selectedId === null || !window.confirm('¿Eliminar esta pieza del catálogo? Esta acción no se puede deshacer.')) return;
         deleteButton.disabled = true;
         try {
-            await api.deleteProduct(selectedId, authToken());
-            clearEditor();
+            await api.deleteProduct(selectedId, token);
+            clearForm();
             showStatus(editorStatus, 'Producto eliminado.', 'success');
             await loadProducts();
         } catch (error) {
@@ -126,21 +198,34 @@
         }
     }
 
-    function clearEditor() {
+    function clearForm() {
         selectedId = null;
-        editor.value = '';
+        form.reset();
         saveButton.textContent = 'Crear producto';
         deleteButton.disabled = true;
         showStatus(editorStatus, '');
     }
 
+    function logout() {
+        token = '';
+        selectedId = null;
+        form.reset();
+        messageList.replaceChildren();
+        list.replaceChildren();
+        workspace.hidden = true;
+        document.getElementById('adminLogin').hidden = false;
+        showStatus(document.getElementById('loginStatus'), 'Sesión cerrada.');
+    }
+
+    loginForm.addEventListener('submit', login);
     document.getElementById('searchButton').addEventListener('click', loadProducts);
     document.getElementById('refreshButton').addEventListener('click', loadProducts);
+    document.getElementById('refreshMessagesButton').addEventListener('click', loadMessages);
+    document.getElementById('logoutButton').addEventListener('click', logout);
     document.getElementById('productSearch').addEventListener('keydown', event => {
         if (event.key === 'Enter') loadProducts();
     });
-    saveButton.addEventListener('click', saveProduct);
+    form.addEventListener('submit', saveProduct);
     deleteButton.addEventListener('click', deleteProduct);
-    document.getElementById('clearButton').addEventListener('click', clearEditor);
-    loadProducts();
+    document.getElementById('clearButton').addEventListener('click', clearForm);
 })();

@@ -1,6 +1,7 @@
 const path = require('node:path');
 require('dotenv').config({ path: path.resolve(__dirname, '..', '.env') });
 const express = require('express');
+const cors = require('cors');
 const http = require('node:http');
 const fs = require('node:fs');
 const crypto = require('node:crypto');
@@ -29,12 +30,13 @@ const DATA_FILES = {
     orders: path.join(DATA_DIR, 'orders.json'),
     newsletter: path.join(DATA_DIR, 'newsletter.json'),
     loyalty: path.join(DATA_DIR, 'loyalty.json'),
-    accounts: path.join(DATA_DIR, 'accounts.json')
+    accounts: path.join(DATA_DIR, 'accounts.json'),
+    contacts: path.join(DATA_DIR, 'contactos.json')
 };
 const SEARCHABLE_PRODUCT_FIELDS = new Set([
     'all', 'id', 'name', 'category', 'gender', 'line', 'price', 'originalPrice',
     'discount', 'collection', 'year', 'material', 'badge', 'isNew', 'sizes',
-    'colors', 'shipping', 'care', 'img', 'desc', 'rating', 'reviews'
+    'colors', 'shipping', 'care', 'img', 'desc', 'origin', 'rating', 'reviews'
 ]);
 
 const MIME_TYPES = {
@@ -206,7 +208,8 @@ function requireAdmin(request) {
         throw error;
     }
     const authorization = request.headers.authorization || '';
-    const submitted = authorization.startsWith('Bearer ') ? authorization.slice(7) : '';
+    const submitted = request.headers['x-admin-token'] ||
+        (authorization.startsWith('Bearer ') ? authorization.slice(7) : '');
     if (!submitted || /\s/.test(submitted)) {
         const error = new Error('Token administrativo ausente o incorrecto.');
         error.status = 401;
@@ -378,6 +381,63 @@ async function handleApi(request, response, url, requestId, productRepository, r
     if (url.pathname === '/api/products' || url.pathname.startsWith('/api/products/')) {
         return handleProductsApi(request, response, url);
     }
+    if (url.pathname === '/api/admin/session') {
+        if (request.method !== 'GET') {
+            const error = new Error('Método no permitido.');
+            error.status = 405;
+            error.code = 'METHOD_NOT_ALLOWED';
+            error.allowedMethods = ['GET'];
+            throw error;
+        }
+        requireAdmin(request);
+        return sendJson(response, 200, { ok: true });
+    }
+
+    if (url.pathname === '/api/contact') {
+        if (request.method === 'GET') {
+            requireAdmin(request);
+            const contacts = await request.contactStorage.list();
+            return sendJson(response, 200, { contacts });
+        }
+        if (request.method !== 'POST') {
+            const error = new Error('Método no permitido para contacto.');
+            error.status = 405;
+            error.code = 'METHOD_NOT_ALLOWED';
+            error.allowedMethods = ['GET', 'POST'];
+            throw error;
+        }
+        const payload = await readJson(request);
+        const name = typeof payload.name === 'string' ? payload.name.trim() : '';
+        const email = typeof payload.email === 'string' ? payload.email.trim().toLowerCase() : '';
+        const subject = typeof payload.subject === 'string' ? payload.subject.trim() : '';
+        const message = typeof payload.message === 'string' ? payload.message.trim() : '';
+        const details = {};
+        if (!name || name.length < 2) details.name = 'Ingresa un nombre de al menos 2 caracteres.';
+        else if (name.length > 100) details.name = 'El nombre no puede superar 100 caracteres.';
+        if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) details.email = 'Ingresa un correo electrónico válido.';
+        else if (email.length > 160) details.email = 'El correo no puede superar 160 caracteres.';
+        if (!subject || subject.length < 3) details.subject = 'El asunto debe tener al menos 3 caracteres.';
+        else if (subject.length > 120) details.subject = 'El asunto no puede superar 120 caracteres.';
+        if (!message || message.length < 10) details.message = 'El mensaje debe tener al menos 10 caracteres.';
+        else if (message.length > 2000) details.message = 'El mensaje no puede superar 2000 caracteres.';
+        if (Object.keys(details).length) {
+            const error = new Error('Revisa los datos del formulario de contacto.');
+            error.status = 400;
+            error.code = 'INVALID_CONTACT';
+            error.details = details;
+            throw error;
+        }
+        const contact = await request.contactStorage.create({
+            id: createId('CON'),
+            name,
+            email,
+            subject,
+            message,
+            createdAt: new Date().toISOString()
+        });
+        return sendJson(response, 201, { ok: true, contact: { id: contact.id, createdAt: contact.createdAt } });
+    }
+
     if (!['/api/newsletter', '/api/loyalty'].includes(url.pathname)) {
         const error = new Error('La ruta API no existe.');
         error.status = 404;
@@ -482,6 +542,7 @@ function createServer({
     productRepository,
     orderStorage,
     recordStorage,
+    contactStorage,
     chatClientFactory,
     chatTimeoutMs,
     databaseStatus = { mode: mongoose.connection.readyState === 1 ? 'mongodb' : 'json' }
@@ -501,7 +562,31 @@ function createServer({
         writeLocal: writeData,
         onDatabaseFallback
     });
+    const contacts = contactStorage || {
+        create: record => recordStore.create('contact_messages', 'contacts', record),
+        list: () => recordStore.list('contact_messages', 'contacts')
+    };
     app.disable('x-powered-by');
+    const allowedOrigins = (process.env.CORS_ORIGIN || '')
+        .split(',')
+        .map(origin => origin.trim())
+        .filter(Boolean);
+    app.use(cors({
+        origin(origin, callback) {
+            if (!origin) return callback(null, true);
+            let hostname = '';
+            try {
+                hostname = new URL(origin).hostname;
+            } catch {
+                return callback(null, false);
+            }
+            const localDevelopment = hostname === 'localhost' || hostname === '127.0.0.1';
+            const netlifyDeployment = hostname.endsWith('.netlify.app');
+            callback(null, localDevelopment || netlifyDeployment || allowedOrigins.includes(origin));
+        },
+        allowedHeaders: ['Content-Type', 'Authorization', 'x-admin-token'],
+        methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS']
+    }));
     app.use((request, response, next) => {
         request.requestId = crypto.randomUUID();
         request.productRepository = repository;
@@ -525,6 +610,7 @@ function createServer({
     }));
 
     app.use('/api', (request, response, next) => {
+        request.contactStorage = contacts;
         let url;
         try {
             url = new URL(request.originalUrl, `http://${request.headers.host || `${HOST}:${PORT}`}`);

@@ -84,12 +84,11 @@
         }
 
         function toggleCart() {
-            if (cart.length === 0 && !window.location.pathname.toLowerCase().includes('carrito')) {
+            const cartModal = document.getElementById('cartModal');
+            if (!cartModal) {
                 window.location.href = './carrito.html';
                 return;
             }
-            const cartModal = document.getElementById('cartModal');
-            if (!cartModal) return;
             cartModal.classList.toggle('open');
             document.body.style.overflow = cartModal.classList.contains('open') ? 'hidden' : '';
         }
@@ -352,7 +351,7 @@
             ADDRESS: 'Carrera 43 #75-130',
             EMAIL_CONTACTO: 'hola@anthros.com',
             EMAIL_VENTAS: 'ventas@anthros.com',
-            PHONE: '+57 (5) 123-4567',
+            PHONE: '+57 300 123 4567',
             WHATSAPP: '573001234567',
             HORARIO: 'Lun-Vie 9am-7pm · Sáb 10am-4pm',
             DOMINIO: 'https://anthros.com'
@@ -438,14 +437,20 @@
         ]);
 
         let PRODUCTS_DATA = [
-            { id: 1, name: 'Camiseta Manga Larga Essence', category: 'mujeres ofertas', gender: 'Mujer', line: 'Básicos', price: 63920, originalPrice: 79900, discount: 20, isNew: false, badge: '-20%', sizes: ['S','M','L'], collection: 'Brisas de Identidad', year: 2026, material: 'Algodón orgánico 100%', colors: ['Marfil', 'Terracota'], shipping: '3-5 días hábiles', care: 'Lavar en frío y secar a la sombra', img: '/assets/images/camiseta-mujer-manga-larga-de-algodon-ecologico.jpg.webp', hoverImg: '/assets/images/Brisas de Identidad  Fresco, holgado y sostenible (3).jfif', desc: 'Una base suave y transpirable de algodón orgánico, con manga larga y silueta relajada. Sus tonos marfil y terracota hacen fácil combinarla durante todo el año.', rating: 5, reviews: 124, cut: 'Relaxed Fit', sustainability: { material: 'Algodón orgánico 100%', impact: 'Diseñada para un uso duradero', cert: '' } },
+            { id: 1, name: 'Camiseta Manga Larga Essence', category: 'mujeres ofertas', gender: 'Mujer', line: 'Básicos', price: 63920, originalPrice: 79900, discount: 20, isNew: false, badge: '-20%', sizes: ['S','M','L'], collection: 'Brisas de Identidad', year: 2026, material: 'Algodón orgánico 100%', colors: ['Marfil', 'Terracota'], shipping: '3-5 días hábiles', care: 'Lavar en frío y secar a la sombra', img: '/assets/images/Brisas de Identidad  Fresco, holgado y sostenible (3).jfif', hoverImg: '/assets/images/Brisas de Identidad  Fresco, holgado y sostenible (2).jfif', desc: 'Una base suave y transpirable de algodón orgánico, con manga larga y silueta relajada. Sus tonos marfil y terracota hacen fácil combinarla durante todo el año.', rating: 5, reviews: 124, cut: 'Relaxed Fit', sustainability: { material: 'Algodón orgánico 100%', impact: 'Diseñada para un uso duradero', cert: '' } },
             { id: 2, name: 'Camisa Lino Serenity', category: 'hombres nuevos', gender: 'Hombre', line: 'Camisas', price: 125000, originalPrice: null, discount: 0, isNew: true, badge: 'Nuevo', sizes: ['S','M','L','XL'], collection: 'Brisas de Identidad', year: 2026, material: 'Lino europeo certificado', colors: ['Arena', 'Blanco humo'], shipping: '3-5 días hábiles', care: 'Lavar a mano y planchar a baja temperatura', img: '/assets/images/Brisas de Identidad  Fresco, holgado y sostenible (13).jfif', hoverImg: '/assets/images/Brisas de Identidad  Fresco, holgado y sostenible (11).jfif', desc: 'Camisa de lino ligero y transpirable, con una silueta relajada que acompaña tanto los días cálidos como los planes especiales. Disponible en arena y blanco humo.', rating: 4, reviews: 87, cut: 'Relaxed Fit', sustainability: { material: 'Lino europeo certificado', impact: 'Fibra natural y biodegradable', cert: 'European Flax® · OEKO-TEX' } },
             { id: 3, name: 'Camiseta Essential Blanca', category: 'hombres ofertas', gender: 'Hombre', line: 'Básicos', price: 67915, originalPrice: 79900, discount: 15, isNew: false, badge: '-15%', sizes: ['S','M','L','XL'], collection: 'Essentials', year: 2026, material: 'Algodón peinado 100%', colors: ['Blanco óptico', 'Negro carbón'], shipping: '3-5 días hábiles', care: 'Lavar del revés en ciclo suave', img: '/assets/images/Brisas de Identidad  Fresco, holgado y sostenible (14).jfif', hoverImg: '/assets/images/Brisas de Identidad  Fresco, holgado y sostenible (10).jfif', desc: 'Un básico de algodón peinado con corte oversize y una paleta clásica en blanco óptico y negro carbón. Una pieza fácil de llevar sola o como primera capa.', rating: 5, reviews: 312, cut: 'Oversize', sustainability: { material: 'Algodón peinado', impact: '', cert: '' } },
             { id: 4, name: 'Camisa Rayas Coastal', category: 'hombres', gender: 'Hombre', line: 'Casual', price: 79900, originalPrice: null, discount: 0, isNew: false, badge: '', sizes: ['S','M','L'], collection: 'Brisas de Identidad', year: 2025, material: 'Algodón y lino', colors: ['Arena', 'Marfil'], shipping: '3-5 días hábiles', care: 'Lavar en frío con colores similares', img: '/assets/images/Brisas de Identidad  Fresco, holgado y sostenible (11).jfif', hoverImg: '/assets/images/Brisas de Identidad  Fresco, holgado y sostenible (13).jfif', desc: 'Camisa de rayas verticales en una mezcla ligera de algodón y lino, con un aire costero y corte regular. Sus tonos arena y marfil funcionan para salidas cotidianas y días soleados.', rating: 4, reviews: 58, cut: 'Regular', sustainability: { material: 'Algodón y lino', impact: 'Fibras de origen natural', cert: '' } },
-            { id: 5, name: 'Camiseta Urban Cozy', category: 'hombres ofertas', gender: 'Hombre', line: 'Básicos', price: 76930, originalPrice: 109900, discount: 30, isNew: false, badge: '-30%', sizes: ['S','M','L','XL'], collection: 'Eclipse Urbano', year: 2025, material: 'Algodón de tacto suave', colors: ['Gris humo'], shipping: '3-5 días hábiles', care: 'Lavar del revés en ciclo suave', img: '/assets/images/adis-gris-19053-742485_019053-1_703c77d9-da0b-4aec-b78a-a613020cff3a.webp', hoverImg: '/assets/images/Brisas de Identidad  Fresco, holgado y sostenible (10).jfif', desc: 'Camiseta de silueta oversize en gris humo, una capa ligera y versátil con carácter urbano. Combínala con tus básicos favoritos y lávala del revés en ciclo suave.', rating: 5, reviews: 201, cut: 'Oversize', eclipseMode: 'night', sustainability: { material: 'Algodón de tacto suave', impact: '', cert: '' } },
+            { id: 5, name: 'Camiseta Urban Cozy', category: 'hombres ofertas', gender: 'Hombre', line: 'Básicos', price: 76930, originalPrice: 109900, discount: 30, isNew: false, badge: '-30%', sizes: ['S','M','L','XL'], collection: 'Eclipse Urbano', year: 2025, material: 'Algodón de tacto suave', colors: ['Gris humo'], shipping: '3-5 días hábiles', care: 'Lavar del revés en ciclo suave', img: '/assets/images/Coleccion essentials (2).jfif', hoverImg: '/assets/images/Brisas de Identidad  Fresco, holgado y sostenible (10).jfif', desc: 'Camiseta de silueta oversize en gris humo, una capa ligera y versátil con carácter urbano. Combínala con tus básicos favoritos y lávala del revés en ciclo suave.', rating: 5, reviews: 201, cut: 'Oversize', eclipseMode: 'night', sustainability: { material: 'Algodón de tacto suave', impact: '', cert: '' } },
             { id: 6, name: 'Vestido Ethereal Bloom', category: 'mujeres nuevos', gender: 'Mujer', line: 'Vestidos', price: 149900, originalPrice: null, discount: 0, isNew: true, badge: 'Nuevo', sizes: ['XS','S','M','L'], collection: 'Brisas de Identidad', year: 2026, material: 'Viscosa ECOVERO', colors: ['Rosa arcilla', 'Verde salvia'], shipping: '3-5 días hábiles', care: 'Lavar a mano y colgar para secar', img: '/assets/images/Brisas de Identidad  Fresco, holgado y sostenible (5).jfif', hoverImg: '/assets/images/Brisas de Identidad  Fresco, holgado y sostenible (6).jfif', desc: 'Vestido de viscosa ECOVERO con caída ligera y una silueta pensada para moverse con comodidad. Los tonos rosa arcilla y verde salvia aportan color sin perder versatilidad. Lavar a mano y colgar para secar.', rating: 5, reviews: 76, cut: 'Relaxed Fit', sustainability: { material: 'Viscosa ECOVERO', impact: 'Fibra de origen celulósico', cert: '' } },
             { id: 7, name: 'Essential Tee Marfil', category: 'unisex esenciales', gender: 'Unisex', line: 'Essentials', price: 69900, originalPrice: null, discount: 0, isNew: true, badge: 'Esencial', sizes: ['XS','S','M','L','XL'], collection: 'Essentials', year: 2026, material: 'Algodón peinado de tacto suave', colors: ['Marfil'], shipping: '3-5 días hábiles', care: 'Lavar en frío y secar a la sombra', img: '/assets/images/Brisas de Identidad  Fresco, holgado y sostenible (10).jfif', hoverImg: '/assets/images/Brisas de Identidad  Fresco, holgado y sostenible (14).jfif', desc: 'Una camiseta unisex de algodón peinado, suave al tacto y de silueta amplia. Su tono marfil y diseño limpio la convierten en un básico fácil de combinar.', rating: 0, reviews: 0, cut: 'Wide', sustainability: { material: 'Algodón peinado', impact: '', cert: '' } },
-            { id: 8, name: 'Camisa Fresca de Lino', category: 'unisex nuevos', gender: 'Unisex', line: 'Edición Fresca', price: 119900, originalPrice: null, discount: 0, isNew: true, badge: 'Edición fresca', sizes: ['S','M','L','XL'], collection: 'Brisas de Identidad', year: 2026, material: 'Lino y algodón', colors: ['Arena', 'Blanco humo'], shipping: '3-5 días hábiles', care: 'Lavar a mano y secar a la sombra', img: '/assets/images/Brisas de Identidad  Fresco, holgado y sostenible (11).jfif', hoverImg: '/assets/images/Brisas de Identidad  Fresco, holgado y sostenible (13).jfif', desc: 'Camisa unisex de lino y algodón con una silueta amplia, ligera y fácil de combinar. Los tonos arena y blanco humo acompañan su carácter fresco; lavar a mano y secar a la sombra.', rating: 0, reviews: 0, cut: 'Wide', sustainability: { material: 'Mezcla de lino y algodón', impact: 'Transpirabilidad natural de las fibras', cert: '' } }
+            { id: 8, name: 'Camisa Fresca de Lino', category: 'unisex nuevos', gender: 'Unisex', line: 'Edición Fresca', price: 119900, originalPrice: null, discount: 0, isNew: true, badge: 'Edición fresca', sizes: ['S','M','L','XL'], collection: 'Brisas de Identidad', year: 2026, material: 'Lino y algodón', colors: ['Arena', 'Blanco humo'], shipping: '3-5 días hábiles', care: 'Lavar a mano y secar a la sombra', img: '/assets/images/Brisas de Identidad  Fresco, holgado y sostenible (11).jfif', hoverImg: '/assets/images/Brisas de Identidad  Fresco, holgado y sostenible (13).jfif', desc: 'Camisa unisex de lino y algodón con una silueta amplia, ligera y fácil de combinar. Los tonos arena y blanco humo acompañan su carácter fresco; lavar a mano y secar a la sombra.', rating: 0, reviews: 0, cut: 'Wide', sustainability: { material: 'Mezcla de lino y algodón', impact: 'Transpirabilidad natural de las fibras', cert: '' } },
+            { id: 9, name: 'Sobrecamisa Arquitectónica', category: 'unisex nuevos', gender: 'Unisex', line: 'Sobrecamisas', price: 189900, originalPrice: null, discount: 0, isNew: true, badge: 'Nuevo', sizes: ['S','M','L','XL'], collection: 'Brisas de Identidad', year: 2026, material: 'Lino y algodón', colors: ['Negro obsidiana'], shipping: '3-5 días hábiles', care: 'Lavar en frío y secar a la sombra', img: '/assets/images/Gemini_Generated_Image_9gsghg9gsghg9gsg.jpg', hoverImg: '/assets/images/Gemini_Generated_Image_jejpt9jejpt9jejp.jpg', desc: 'Una capa ligera de líneas precisas y volumen relajado. La mezcla de lino y algodón aporta textura natural para llevarla abierta sobre una camiseta o como pieza protagonista.', rating: 0, reviews: 0, cut: 'Relaxed Fit', sustainability: { material: 'Lino y algodón', impact: 'Fibras de origen natural', cert: '' } },
+            { id: 10, name: 'Hoodie Pesado', category: 'unisex nuevos', gender: 'Unisex', line: 'Hoodies', price: 229900, originalPrice: null, discount: 0, isNew: true, badge: 'Nuevo', sizes: ['S','M','L','XL'], collection: 'Eclipse Urbano', year: 2026, material: 'Algodón perchado de alto gramaje', colors: ['Gris humo'], shipping: '3-5 días hábiles', care: 'Lavar del revés en ciclo suave', img: '/assets/images/Gemini_Generated_Image_uvhojbuvhojbuvho.jpg', hoverImg: '/assets/images/Gemini_Generated_Image_uvhojbuvhojbuvho.jpg', desc: 'Felpa de alto gramaje, hombro caído y estructura envolvente: abrigo cómodo con una silueta urbana que conserva su forma y acompaña el ritmo diario.', rating: 0, reviews: 0, cut: 'Oversize', sustainability: { material: 'Algodón perchado', impact: 'Diseñada para acompañar varias temporadas', cert: '' } },
+            { id: 11, name: 'Camiseta Heavyweight', category: 'unisex nuevos', gender: 'Unisex', line: 'Camisetas', price: 94900, originalPrice: null, discount: 0, isNew: true, badge: 'Nuevo', sizes: ['XS','S','M','L','XL'], collection: 'Eclipse Urbano', year: 2026, material: 'Algodón pesado 240 g/m²', colors: ['Gris grafito'], shipping: '3-5 días hábiles', care: 'Lavar del revés en ciclo suave', img: '/assets/images/Gemini_Generated_Image_cxyvm0cxyvm0cxyv.jpg', hoverImg: '/assets/images/Gemini_Generated_Image_cxyvm0cxyvm0cxyv.jpg', desc: 'Algodón compacto de tacto firme, cuello reforzado y caída recta. En gris grafito, esta camiseta esencial tiene presencia propia y está pensada para combinar capas.', rating: 0, reviews: 0, cut: 'Regular', sustainability: { material: 'Algodón de alto gramaje', impact: 'Construcción pensada para un uso prolongado', cert: '' } },
+            { id: 12, name: 'Pantalón Utilitario', category: 'unisex nuevos', gender: 'Unisex', line: 'Pantalones', price: 179900, originalPrice: null, discount: 0, isNew: true, badge: 'Nuevo', sizes: ['S','M','L','XL'], collection: 'Eclipse Urbano', year: 2026, material: 'Algodón twill', colors: ['Oliva'], shipping: '3-5 días hábiles', care: 'Lavar en frío con colores similares', img: '/assets/images/Gemini_Generated_Image_cq5ypccq5ypccq5y.jpg', hoverImg: '/assets/images/Gemini_Generated_Image_cq5ypccq5ypccq5y.jpg', desc: 'Twill resistente, bolsillos funcionales y pierna relajada para moverse con libertad. El diseño depurado equilibra practicidad y una silueta urbana fácil de vestir.', rating: 0, reviews: 0, cut: 'Relaxed Fit', sustainability: { material: 'Algodón twill', impact: 'Tejido resistente para mayor vida útil', cert: '' } },
+            { id: 13, name: 'Jean Streetwear', category: 'unisex nuevos', gender: 'Unisex', line: 'Denim', price: 199900, originalPrice: null, discount: 0, isNew: true, badge: 'Nuevo', sizes: ['S','M','L','XL'], collection: 'Eclipse Urbano', year: 2026, material: 'Denim de algodón', colors: ['Negro lavado'], shipping: '3-5 días hábiles', care: 'Lavar del revés con agua fría', img: '/assets/images/Gemini_Generated_Image_m2wvufm2wvufm2wv.jpg', hoverImg: '/assets/images/Gemini_Generated_Image_m2wvufm2wvufm2wv.jpg', desc: 'Denim negro lavado de corte amplio y caída limpia. Un jean versátil de espíritu streetwear que funciona con camisetas gráficas, básicos y capas estructuradas.', rating: 0, reviews: 0, cut: 'Wide', sustainability: { material: 'Denim de algodón', impact: 'Lavar en frío para prolongar su vida útil', cert: '' } },
+            { id: 14, name: 'Sudadera Streetwear', category: 'unisex nuevos', gender: 'Unisex', line: 'Sudaderas', price: 169900, originalPrice: null, discount: 0, isNew: true, badge: 'Nuevo', sizes: ['S','M','L','XL'], collection: 'Eclipse Urbano', year: 2026, material: 'Algodón perchado', colors: ['Negro obsidiana'], shipping: '3-5 días hábiles', care: 'Lavar del revés en ciclo suave', img: '/assets/images/Gemini_Generated_Image_xmkch8xmkch8xmkc.jpg', hoverImg: '/assets/images/Gemini_Generated_Image_xmkch8xmkch8xmkc.jpg', desc: 'Una sudadera de tacto suave y volumen cómodo, con puños firmes y acabado limpio. Su paleta sobria la convierte en una capa cotidiana con identidad urbana.', rating: 0, reviews: 0, cut: 'Relaxed Fit', sustainability: { material: 'Algodón perchado', impact: 'Diseñada para un uso prolongado', cert: '' } }
         ];
 
         /* =========================================================
@@ -1274,7 +1279,7 @@
         const HERO_SLIDES = Object.freeze([
             { image: './assets/images/Brisas de Identidad  Fresco, holgado y sostenible (1).jfif', label: 'Anthros / 01' },
             { image: './assets/images/Brisas de Identidad  Fresco, holgado y sostenible (4).jfif', label: 'Anthros / 02' },
-            { image: './assets/images/camiseta-mujer-manga-larga-de-algodon-ecologico.jpg.webp', label: 'Anthros / 03' }
+            { image: './assets/images/Coleccion essentials (1).jfif', label: 'Anthros / 03' }
         ]);
 
         function renderHeroSlide() {
@@ -1331,6 +1336,7 @@
                 catalogo: 'catalogo.html',
                 coleccion: 'catalogo.html',
                 nosotros: 'nosotros.html',
+                impacto: 'nosotros.html#impacto',
                 cart: 'carrito.html',
                 carrito: 'carrito.html',
                 checkout: 'carrito.html',
@@ -1766,6 +1772,7 @@
             const safeColors = (product.colors || []).map(escapeHTML).join(' · ');
             const safeShipping = escapeHTML(product.shipping);
             const safeCare = escapeHTML(product.care);
+            const safeOrigin = escapeHTML(product.origin || 'Talleres aliados de Bogotá y Medellín');
             const originalPrice = product.originalPrice ? `<span class="product-detail-original">${formatPrice(product.originalPrice)}</span><span class="product-detail-discount">-${product.discount}%</span>` : '';
             const sizes = (product.sizes || ['S', 'M', 'L']).map((size, index) => `<button type="button" class="detail-size ${index === 1 ? 'selected' : ''}" onclick="selectProductSize(this)">${escapeHTML(size)}</button>`).join('');
             const safeSustainability = product.sustainability || {};
@@ -1802,9 +1809,9 @@
                                 <div class="sustainability-item"><span>Material</span><strong>${sustMaterial}</strong></div>
                                 ${sustImpact ? `<div class="sustainability-item"><span>Impacto</span><strong>${sustImpact}</strong></div>` : ''}
                                 ${sustCert ? `<div class="sustainability-item"><span>Certificaciones</span><strong>${sustCert}</strong></div>` : ''}
-                                <div class="sustainability-item"><span>Origen</span><strong>Producción local e independiente en Colombia</strong></div>
+                                <div class="sustainability-item"><span>Origen</span><strong>${safeOrigin}</strong></div>
                             </div>
-                            <p class="sustainability-note">${safeCare}. Trabajamos con talleres locales de Bogotá y Medellín bajo principios de comercio justo y sostenibilidad; consulta la ficha para conocer la composición de sus fibras.</p>
+                            <p class="sustainability-note">${safeCare}. Trabajamos con talleres locales bajo principios de comercio justo y sostenibilidad; consulta la ficha para conocer la composición de sus fibras.</p>
                         </section>
                         <div class="detail-buy-row"><div class="detail-quantity"><button type="button" onclick="changeProductQuantity(-1)" aria-label="Restar cantidad"></button><strong id="productQuantity">1</strong><button type="button" onclick="changeProductQuantity(1)" aria-label="Sumar cantidad">+</button></div><button type="button" class="detail-add-button" onclick="addProductFromPage(${product.id})">Añadir al carrito <span></span></button></div>
                         <div class="detail-service"><span></span><p><strong>Compra con calma.</strong><br>14 días para cambios y devoluciones. Revisa nuestra <a href="./garantias.html">política de garantías</a>.</p></div>
@@ -2358,11 +2365,8 @@
         /* 17) CARRITO CON BENEFICIOS */
         function updateCart() {
             const itemsEl = document.getElementById('cartItems');
-            const emptyEl = document.getElementById('cartEmpty');
             const summaryEl = document.getElementById('cartSummary');
-            const countEl = document.getElementById('cartCount');
             const checkoutBtn = document.getElementById('checkoutBtn');
-            if (!itemsEl || !summaryEl || !countEl) return;
             const totalQty = cart.reduce((s, i) => s + i.qty, 0);
             document.querySelectorAll('.cart-count, #navCartCount').forEach(badge => {
                 badge.textContent = totalQty;
@@ -2370,14 +2374,11 @@
                 if (totalQty > 0) badge.classList.add('pop');
             });
             try { updateFavoritesCount(); } catch(e) {}
+            if (!itemsEl || !summaryEl) return;
 
             if (cart.length === 0) {
                 itemsEl.innerHTML = '';
-                summaryEl.innerHTML = '';
-                if (emptyEl) {
-                    summaryEl.appendChild(emptyEl);
-                    emptyEl.style.display = 'block';
-                }
+                summaryEl.innerHTML = '<div class="cart-empty" id="cartEmpty"><div class="cart-empty-icon"></div><p>Tu carrito está vacío</p><p>¡Añade prendas para comenzar!</p></div>';
                 if (checkoutBtn) checkoutBtn.style.display = 'none';
                 return;
             }

@@ -31,16 +31,21 @@ Para una vista rápida sin backend, también puedes abrir `front/index.html` dir
 - `POST /api/orders`
 - `POST /api/chat`
 - `POST /api/accounts/register`
+- `POST /api/contact`
+- `GET /api/contact` (requiere token de administración)
+- `GET /api/admin/session` (valida el token de administración)
 - `POST /api/newsletter`
 - `POST /api/loyalty`
 
-Los pedidos, suscripciones al newsletter y miembros de lealtad se guardan en MongoDB cuando está configurado; sin MongoDB se conservan en archivos JSON bajo `back/data/`. El catálogo local persiste en `back/data/catalog.json`, inicializado desde `back/data/products.json`.
+Los pedidos, suscripciones al newsletter, miembros de lealtad y mensajes de contacto se guardan en MongoDB cuando está configurado; sin MongoDB se conservan en archivos JSON bajo `back/data/` (los contactos en `back/data/contactos.json`). El catálogo local persiste en `back/data/catalog.json`, inicializado desde `back/data/products.json`.
+
+El formulario de contacto valida nombre, correo, asunto y mensaje en el navegador y en el servidor. El panel `/admin-productos.html` valida el token mediante el backend antes de mostrar la administración del catálogo y los mensajes. Las rutas administrativas aceptan `Authorization: Bearer <ADMIN_API_TOKEN>` o `x-admin-token`.
 
 Las imágenes de productos se sirven desde `front/assets/images/`; sus rutas se resuelven desde la página actual, tanto al abrir el HTML directamente como al navegar bajo una subcarpeta. MágicoBot consulta Groq a través de `POST /api/chat` cuando `GROQ_API_KEY` está configurada y conserva la guía local como respuesta de respaldo. Abre `/admin-guia-chatbot.html` para editar su guía, importarla o exportarla en JSON. Cada consulta emite `anthros:assistant-message` con `detail.message` y `detail.answer`.
 
 ## Administración del catálogo
 
-Abre `/admin-productos.html` para listar y buscar productos, cargar una ficha, crearla, actualizarla o eliminarla. Las lecturas del catálogo son públicas; `POST`, `PUT`, `PATCH` y `DELETE` requieren `Authorization: Bearer <ADMIN_API_TOKEN>`. El panel mantiene el token solo en memoria mientras está abierta la pestaña; no lo guarda en `localStorage`.
+Abre `/admin-productos.html` para iniciar sesión, listar y buscar productos, crear, editar o eliminar piezas y consultar los mensajes recibidos. Las lecturas del catálogo son públicas; `POST`, `PUT`, `PATCH` y `DELETE` requieren token. El panel mantiene el token solo en memoria mientras está abierta la pestaña; no lo guarda en `localStorage`.
 
 Configura el token en el entorno del proceso backend antes de habilitar operaciones administrativas. Usa un secreto aleatorio largo, guárdalo en un gestor de secretos y no lo incluyas en el frontend ni en el repositorio. Si el token no está configurado, las escrituras se deshabilitan con HTTP 503. Para crear productos con imágenes, coloca primero el archivo bajo `front/assets/images/` y usa una ruta local como `/assets/images/camiseta.jpg`.
 
@@ -65,6 +70,8 @@ Duplica `.env.example` como `.env` y completa las claves privadas en el servidor
 - `MONGODB_DB`: nombre de la base (opcional; predeterminado `anthros`).
 - `MONGODB_COLLECTION`: colección (opcional; predeterminado `products`).
 - `ADMIN_API_TOKEN`: token de escritura de administración.
+- `CORS_ORIGIN`: lista opcional de orígenes permitidos, separada por comas. También se permiten orígenes `*.netlify.app` y hosts locales de desarrollo.
+- `window.ANTHROS_API_URL`: URL raíz del backend cuando el frontend se despliega por separado (por ejemplo, `https://api.ejemplo.com`). Define este valor antes de cargar `assets/js/services/index.js`; si se omite, la API se sirve desde `/api` en el mismo origen.
 - `GROQ_API_KEY`: clave de Groq para el chat (opcional).
 - `GROQ_MODEL`: modelo Groq (opcional; predeterminado `qwen/qwen3.8-27b`).
 

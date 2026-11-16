@@ -3,7 +3,7 @@
 const PRODUCT_FIELDS = new Set([
     'id', 'name', 'category', 'gender', 'line', 'price', 'originalPrice', 'discount',
     'isNew', 'badge', 'sizes', 'collection', 'year', 'material', 'colors', 'shipping',
-    'care', 'img', 'hoverImg', 'desc', 'rating', 'reviews', 'cut', 'sustainability'
+    'care', 'img', 'hoverImg', 'desc', 'rating', 'reviews', 'cut', 'origin', 'sustainability'
 ]);
 const TEXT_LIMITS = Object.freeze({
     name: 100,
@@ -16,7 +16,8 @@ const TEXT_LIMITS = Object.freeze({
     shipping: 80,
     care: 160,
     desc: 500,
-    cut: 40
+    cut: 40,
+    origin: 80
 });
 const VALID_SIZES = new Set(['XS', 'S', 'M', 'L', 'XL', 'XXL']);
 
@@ -107,7 +108,7 @@ function validateProduct(input, { partial = false } = {}) {
         if (partial && !Object.prototype.hasOwnProperty.call(input, field)) continue;
         product[field] = cleanText(input[field], field, errors, { maxLength: TEXT_LIMITS[field] });
     }
-    for (const field of ['cut', 'hoverImg']) {
+    for (const field of ['cut', 'hoverImg', 'origin']) {
         if (!Object.prototype.hasOwnProperty.call(input, field)) continue;
         product[field] = cleanText(input[field], field, errors, {
             required: false,

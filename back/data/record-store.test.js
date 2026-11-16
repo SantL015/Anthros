@@ -59,3 +59,53 @@ test('record store conserva la persistencia JSON local y la deduplicación', asy
     assert.equal(await store.addUnique('loyalty_members', 'loyalty', member), false);
     assert.deepEqual(records, [member]);
 });
+
+test('record store crea y ordena mensajes en el respaldo JSON', async () => {
+    let records = [];
+    const fallbacks = [];
+    const store = createRecordStore({
+        connection: { readyState: 0 },
+        readLocal: name => {
+            assert.equal(name, 'contacts');
+            return records;
+        },
+        writeLocal: (name, value) => {
+            assert.equal(name, 'contacts');
+            records = value;
+        },
+        onDatabaseFallback: async error => fallbacks.push(error.code)
+    });
+    const older = { id: 'CON-1', createdAt: '2026-01-01T00:00:00.000Z' };
+    const newer = { id: 'CON-2', createdAt: '2026-01-02T00:00:00.000Z' };
+
+    await store.create('contact_messages', 'contacts', older);
+    await store.create('contact_messages', 'contacts', newer);
+    assert.deepEqual((await store.list('contact_messages', 'contacts')).map(item => item.id), ['CON-2', 'CON-1']);
+    assert.deepEqual(records.map(item => item.id), ['CON-2', 'CON-1']);
+    assert.deepEqual(fallbacks, ['DATABASE_DISCONNECTED', 'DATABASE_DISCONNECTED', 'DATABASE_DISCONNECTED']);
+});
+
+test('record store crea y lista contactos desde MongoDB cuando está conectado', async () => {
+    const records = [];
+    const collection = {
+        insertOne: async record => records.push(record),
+        find: filter => {
+            assert.deepEqual(filter, {});
+            return {
+                sort: sort => {
+                    assert.deepEqual(sort, { createdAt: -1 });
+                    return { toArray: async () => records };
+                }
+            };
+        }
+    };
+    const store = createRecordStore({
+        connection: { readyState: 1, db: { collection: () => collection } },
+        readLocal: () => { throw new Error('No debe leer JSON en modo MongoDB'); },
+        writeLocal: () => { throw new Error('No debe escribir JSON en modo MongoDB'); }
+    });
+    const contact = { id: 'CON-3', createdAt: '2026-01-03T00:00:00.000Z' };
+
+    await store.create('contact_messages', 'contacts', contact);
+    assert.deepEqual(await store.list('contact_messages', 'contacts'), [contact]);
+});

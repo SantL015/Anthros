@@ -1,7 +1,10 @@
 (function initializeAnthrosServices(global) {
     'use strict';
 
-    const DEFAULT_API_BASE = '/api';
+    const API_BASE_URL = global.ANTHROS_API_URL || '';
+    const DEFAULT_API_BASE = API_BASE_URL
+        ? `${API_BASE_URL.replace(/\/+$/, '')}/api`
+        : '/api';
     const DEFAULT_TIMEOUT = 12000;
     const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     const PHONE_PATTERN = /^[+\d][\d\s()-]{6,}$/;
@@ -342,6 +345,21 @@
         },
         joinLoyalty(data, options) {
             return this.post('/loyalty', data, options);
+        },
+        submitContact(data, options) {
+            return this.post('/contact', data, options);
+        },
+        verifyAdmin(token, options = {}) {
+            return this.get('/admin/session', {
+                ...options,
+                headers: { ...options.headers, Authorization: `Bearer ${token}` }
+            });
+        },
+        contacts(token, options = {}) {
+            return this.get('/contact', {
+                ...options,
+                headers: { ...options.headers, Authorization: `Bearer ${token}` }
+            });
         },
         chat(messageOrPayload, options) {
             const payload = typeof messageOrPayload === 'string'

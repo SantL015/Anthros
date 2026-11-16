@@ -906,6 +906,7 @@
         .about-page-hero h1 em { color: var(--orange-soft); font-weight: 500; }
         .about-page-hero p:last-child { max-width: 520px; color: rgba(255,248,240,0.8); font-size: var(--fs-lg); }
         .about-nav-grid, .pillars-grid, .journal-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+        .about-nav-grid { grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); }
         .about-nav-card, .pillars-grid article, .journal-grid article { padding: 24px; border: 1px solid rgba(214,140,69,0.2); background: rgba(255,252,247,0.72); border-radius: var(--radius-md); transition: transform 0.3s var(--ease-out), box-shadow 0.3s ease; }
         .about-nav-card:hover, .pillars-grid article:hover, .journal-grid article:hover { transform: translateY(-6px); box-shadow: 0 14px 28px var(--shadow-sm); }
         .about-nav-card span, .pillars-grid span, .journal-grid article > span { color: var(--orange-terracotta); font-size: var(--fs-xs); font-weight: 800; letter-spacing: 2px; }
@@ -1595,6 +1596,19 @@
             line-height: 1.7;
         }
 
+        .footer-contact {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px 24px;
+            margin: 0 0 var(--space-5);
+            font-size: var(--fs-sm);
+            font-style: normal;
+        }
+
+        .footer-contact a { color: rgba(255, 248, 240, 0.84); }
+        .footer-contact a:hover { color: var(--orange-warm); }
+
         .footer-social {
             display: flex;
             justify-content: center;
@@ -2028,9 +2042,11 @@
             flex-direction: column;
             gap: var(--space-3);
             margin-bottom: var(--space-5);
-            flex: 1;
+            flex: 1 0 150px;
+            min-height: 150px;
             overflow-y: auto;
             padding-right: 4px;
+            overscroll-behavior: contain;
         }
 
         .cart-items::-webkit-scrollbar {
@@ -4233,6 +4249,9 @@
         .impact-heading h2 { max-width: 430px; margin: 8px 0 18px; color: #121212; font: 600 clamp(2.8rem, 5vw, 4.8rem)/0.9 var(--font-display); }
         .impact-heading h2 em { color: #C8102E; font-weight: 500; }
         .impact-heading p { max-width: 400px; margin-bottom: 24px; color: #65615C; font-size: 0.88rem; line-height: 1.8; }
+        .impact-workshop-photo { max-width: 400px; margin: 0 0 24px; overflow: hidden; background: #e8e2d9; }
+        .impact-workshop-photo img { display: block; width: 100%; aspect-ratio: 1.55; object-fit: cover; }
+        .impact-workshop-photo figcaption { padding: 9px 12px; color: #65615C; font-size: 0.64rem; letter-spacing: 0.06em; }
         .impact-heading > a { color: #121212; border-color: #C8102E; }
         .impact-pillars { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); align-content: center; gap: 18px; }
         .impact-pillars article { padding-top: 16px; border-top: 2px solid #C8102E; }
