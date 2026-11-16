@@ -9,7 +9,7 @@ npm install
 npm start
 ```
 
-Para usar variables locales, copia `.env.example` a `.env` y completa `MONGO_URI` y `GROQ_API_KEY`. Abre `http://localhost:3000`; para desarrollo usa `npm run dev` y para validar sintaxis y pruebas ejecuta `npm test`.
+Para usar variables locales, copia `.env.example` a `.env` y completa `MONGO_URI` y `GROQ_API_KEY`. Abre `http://localhost:10000`; para desarrollo usa `npm run dev` y para validar sintaxis y pruebas ejecuta `npm test`.
 
 El seed es opcional y requiere `MONGO_URI`:
 
@@ -52,8 +52,8 @@ Configura el token en el entorno del proceso backend antes de habilitar operacio
 Ejemplo:
 
 ```bash
-curl "http://localhost:3000/api/products?field=collection&value=Esenciales&limit=20"
-curl -X POST "http://localhost:3000/api/products" \
+curl "http://localhost:10000/api/products?field=collection&value=Esenciales&limit=20"
+curl -X POST "http://localhost:10000/api/products" \
   -H "Authorization: Bearer $ADMIN_API_TOKEN" \
   -H "Content-Type: application/json" \
   --data '{"name":"Camiseta Essential","category":"hombres","gender":"Hombre","line":"Básicos","price":88000,"originalPrice":null,"discount":0,"isNew":true,"badge":"Nuevo","sizes":["S","M","L"],"collection":"Esenciales","year":2026,"material":"Algodón orgánico","colors":["Marfil"],"shipping":"3-5 días hábiles","care":"Lavar en frío","img":"/assets/images/camiseta.jpg","desc":"Algodón cómodo de uso diario.","rating":5,"reviews":0}'
@@ -65,7 +65,7 @@ Los errores de la API usan JSON con `error.code`, `error.message`, `error.status
 
 Duplica `.env.example` como `.env` y completa las claves privadas en el servidor (nunca en HTML o JavaScript del navegador). El modo predeterminado usa archivos JSON y no necesita servicios externos:
 
-- `PORT`: puerto HTTP (por defecto `3000`).
+- `PORT`: puerto HTTP proporcionado por la plataforma (por defecto `10000`); el servidor escucha en `0.0.0.0`.
 - `MONGO_URI`: cadena de conexión Atlas. `MONGODB_URI` sigue disponible como alias heredado.
 - `MONGODB_DB`: nombre de la base (opcional; predeterminado `anthros`).
 - `MONGODB_COLLECTION`: colección (opcional; predeterminado `products`).
@@ -74,6 +74,8 @@ Duplica `.env.example` como `.env` y completa las claves privadas en el servidor
 - `window.ANTHROS_API_URL`: URL raíz del backend cuando el frontend se despliega por separado (por ejemplo, `https://api.ejemplo.com`). Define este valor antes de cargar `assets/js/services/index.js`; si se omite, la API se sirve desde `/api` en el mismo origen.
 - `GROQ_API_KEY`: clave de Groq para el chat (opcional).
 - `GROQ_MODEL`: modelo Groq (opcional; predeterminado `qwen/qwen3.8-27b`).
+
+En Render, configura `npm install` como comando de compilación y `npm start` como comando de inicio. Render proporciona `PORT`; el servicio escucha en `0.0.0.0` y Express publica `front/` junto con la API. Configura allí `GROQ_API_KEY`, `GROQ_MODEL` y `ADMIN_API_TOKEN` como variables privadas según las funciones que utilices.
 
 Al iniciar con `MONGO_URI`, el servidor conecta Mongoose para pedidos y usa MongoDB para catálogo, cuentas, newsletter y lealtad. Crea índices únicos para IDs de producto, correo y pedidos; carga `back/data/products.json` solo cuando el catálogo está vacío. Ante fallos transitorios de DNS/red cambia a JSON local y `/api/health` reporta `database: "json"`; tras una caída en caliente el proceso permanece en modo local hasta reiniciarse. Los datos escritos durante ese periodo requieren reconciliación antes de volver a usar MongoDB.
 

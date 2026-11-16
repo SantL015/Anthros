@@ -9,7 +9,7 @@ const { createProductRepository } = require('./repository');
 const { SYSTEM_INSTRUCTION } = require('../routes/chat');
 
 process.env.ADMIN_API_TOKEN = 'anthros-test-token-with-sufficient-length';
-const { createServer } = require('../server');
+const { createServer, startServer } = require('../server');
 
 const tempDirectory = path.join(os.tmpdir(), `anthros-products-${process.pid}-${Date.now()}`);
 const seedPath = path.resolve(__dirname, '..', 'data', 'products.json');
@@ -539,4 +539,41 @@ test('Express sirve el inicio y reporta el estado del servicio', async () => {
     const home = await fetch(`${baseUrl}/`);
     assert.equal(home.status, 200);
     assert.match(await home.text(), /ANTHROS/);
+
+    const catalog = await fetch(`${baseUrl}/catalogo.html`);
+    assert.equal(catalog.status, 200);
+    assert.match(catalog.headers.get('content-type'), /text\/html/);
+
+    const script = await fetch(`${baseUrl}/assets/js/app.js`);
+    assert.equal(script.status, 200);
+
+    const missingApi = await request('/api/no-such-route');
+    assert.equal(missingApi.response.status, 404);
+    assert.equal(missingApi.payload.error.code, 'ROUTE_NOT_FOUND');
+});
+
+test('startServer binds all interfaces and honors an ephemeral port', async () => {
+    const started = await startServer({
+        port: 0,
+        mongoUri: '',
+        productRepositoryFactory: () => ({
+            initialize: async () => {},
+            close: async () => {}
+        })
+    });
+
+    try {
+        const address = started.server.address();
+        assert.equal(address.address, '0.0.0.0');
+        assert.ok(address.port > 0);
+
+        const health = await fetch(`http://127.0.0.1:${address.port}/api/health`);
+        assert.equal(health.status, 200);
+        assert.equal((await health.json()).service, 'anthros');
+    } finally {
+        await new Promise((resolve, reject) => {
+            started.server.close(error => error ? reject(error) : resolve());
+        });
+        await started.productRepository.close();
+    }
 });

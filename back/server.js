@@ -14,12 +14,12 @@ const { createProductsRouter } = require('./routes/products');
 const { createRecordStore } = require('./data/record-store');
 const { createResilientProductRepository } = require('./products/resilient-repository');
 
-const configuredPort = process.env.PORT === undefined ? 3000 : Number(process.env.PORT);
+const configuredPort = Number(process.env.PORT || 10000);
 if (!Number.isInteger(configuredPort) || configuredPort < 0 || configuredPort > 65535) {
     throw new Error('PORT debe ser un número entero entre 0 y 65535.');
 }
 const PORT = configuredPort;
-const HOST = process.env.HOST || 'localhost';
+const HOST = '0.0.0.0';
 const ROOT_DIR = path.resolve(__dirname, '..');
 const FRONTEND_DIR = path.join(ROOT_DIR, 'front');
 const DATA_DIR = path.join(__dirname, 'data');
@@ -627,6 +627,8 @@ function createServer({
             else response.destroy();
         });
     });
+
+    app.use(express.static(FRONTEND_DIR));
 
     app.use((request, response) => {
         if (request.method !== 'GET' && request.method !== 'HEAD') {
